@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-
+import { AddPage } from '../add/add';
 import { CarouselComponent } from "../../components/carousel.component";
 
 
@@ -99,5 +99,10 @@ export class HomePage {
       isSelected: false,
     }
   ];
+
+  goToAdd(){
+    this.navCtrl.push(AddPage);
+  }
+
 
 }

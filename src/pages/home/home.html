@@ -1,11 +1,14 @@
 <ion-header>
+
   <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
+    <ion-title>Home</ion-title>
   </ion-navbar>
+
 </ion-header>
 
-<ion-content padding>
+<ion-content>
   	<carousel [slides]="slides"></carousel>
+  	<ion-fab right bottom>
+   <button ion-fab (click)="goToAdd()">+</button>
+ </ion-fab>
 </ion-content>
