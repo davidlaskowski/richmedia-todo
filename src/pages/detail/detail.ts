@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { ToDo } from '../../models/todo';
+
+
 /**
  * Generated class for the DetailPage page.
  *
@@ -15,11 +18,19 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class DetailPage {
 
+	private toDoItem: ToDo;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+  	this.toDoItem = this.navParams.get('item');
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad DetailPage');
+  ionViewDidLoad(){
+  	
+  	console.log(this.toDoItem);
+
   }
 
+  goBack(){
+  	this.navCtrl.pop(this);
+  }
 }

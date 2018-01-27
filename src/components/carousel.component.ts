@@ -1,13 +1,14 @@
 import { Component, Input, Output, EventEmitter, ElementRef, QueryList, ContentChildren } from '@angular/core';
 import { IonicSwipeAllModule } from 'ionic-swipe-all';
+import { NavController, NavParams } from 'ionic-angular';
 
-export interface CourselItem {
-  description: string;
-  color?: string
-}
+import { DetailPage } from "../pages/detail/detail";
+import { ToDo } from '../models/todo';
+
 
 interface SlideItem {
   idx: number;
+  name: string,
   description: string;
   color?: string;
   currentPlacement: number
@@ -19,15 +20,16 @@ interface SlideItem {
   template: `
     <div class="carousel-container">
       <div class="carousel">
-        <div swipeAll (click)="showDetails()" radio-group class="carousel-slide-item" 
+        <div swipeAll radio-group class="carousel-slide-item" 
         *ngFor="let item of items"
+        (click)="showDetails(item)"
         [style.background-color]="item.color" 
         [ngStyle]="{'transform': 'rotateX(-'+item.currentPlacement+'deg)  translateZ('+tz+'px)', '-webkit-transform': 'rotateX('+item.currentPlacement+'deg)  translateZ('+tz+'px)', '-ms-transform': 'rotateX('+item.currentPlacement+'deg)  translateZ('+tz+'px)', 
         '-o-transform': 'rotateX('+item.currentPlacement+'deg)  translateZ('+tz+'px)'}"
         (swipeup)="swipeUp($event);"
         (swipedown)="swipeDown($event);"
         >
-          <p>{{item.description}}</p>
+          <p style="top: 50%, transform: translateY(-50%);">{{item.name}}</p>
  
         </div>
       </div>
@@ -40,16 +42,18 @@ export class CarouselComponent {
   private containerHeight: number = 200;
   private tz: number;
   private tx: number;
+  private toDoItem: ToDo;
 
-  @Input() set slides(values: Array<CourselItem>) {
+  @Input() set slides(values: Array<ToDo>) {
     if (!values.length) return;
 
     let degree: number = 0;
     this.tx = 360 / values.length;
     this.tz = Math.round((this.containerHeight / 2) / Math.tan(Math.PI / values.length));
-    this.items = <Array<SlideItem>>values.map((item: CourselItem, index: number) => {
+    this.items = <Array<SlideItem>>values.map((item: ToDo, index: number) => {
       let slideItem = {
         idx: index,
+        name: item.name,
         description: item.description,
         color: item.color,
         currentPlacement: degree
@@ -59,7 +63,7 @@ export class CarouselComponent {
     })
   }
 
-  constructor(private eleRef: ElementRef) {
+  constructor(private eleRef: ElementRef, public navCtrl: NavController, public navParams: NavParams) {
    }
 
   swipeDown() {
@@ -78,6 +82,10 @@ export class CarouselComponent {
     ele.style[ '-moz-transform' ] = "rotateX(" + this.currentDeg + "deg)";
     ele.style[ '-o-transform' ] = "rotateX(" + this.currentDeg + "deg)";
     ele.style[ 'transform' ] = "rotateX(" + this.currentDeg + "deg)";
+  }
+
+  showDetails(item: any){
+    this.navCtrl.push(DetailPage, {'item': item});
   }
 
 } 

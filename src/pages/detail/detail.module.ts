@@ -10,4 +10,4 @@ import { DetailPage } from './detail';
     IonicPageModule.forChild(DetailPage),
   ],
 })
-export class DetailPageModule {}
+export class AddPageModule {}

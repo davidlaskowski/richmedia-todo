@@ -1,4 +1,4 @@
-export interface Todo{
+export interface ToDo{
 	id?: string;
 	name: string;
 	description: string;
@@ -6,4 +6,5 @@ export interface Todo{
 	duedate?: any;
 	estimatedTime?: number;
 	points?: number;
+	color?: string;
 }
