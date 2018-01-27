@@ -19,7 +19,7 @@ interface SlideItem {
   template: `
     <div class="carousel-container">
       <div class="carousel">
-        <div swipeAll radio-group class="carousel-slide-item" 
+        <div swipeAll (click)="showDetails()" radio-group class="carousel-slide-item" 
         *ngFor="let item of items"
         [style.background-color]="item.color" 
         [ngStyle]="{'transform': 'rotateX(-'+item.currentPlacement+'deg)  translateZ('+tz+'px)', '-webkit-transform': 'rotateX('+item.currentPlacement+'deg)  translateZ('+tz+'px)', '-ms-transform': 'rotateX('+item.currentPlacement+'deg)  translateZ('+tz+'px)', 
