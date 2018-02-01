@@ -20,9 +20,8 @@ import { FirebaseProvider } from '../../providers/firebase/firebase';
 })
 
 export class AddPage {
-<<<<<<< HEAD
   todoItems: Observable<any[]>;
-  newTodo = {} as Todo;
+  newTodo = {} as ToDoItem;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, public firebaseProvider: FirebaseProvider) {
      this.todoItems = this.firebaseProvider.getAll().valueChanges();
@@ -37,23 +36,6 @@ export class AddPage {
   }
 
   removeTodo(){
-    
-=======
-	private toDoItem: ToDoItem;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder) {
-     this.toDoItem = {
-       name: '',
-       description: ''
-     }
-  }
-
-  logForm(){
-  }
-
-  test(){
-  	//this.navCtrl.pop(this); 
->>>>>>> 9a75c688f94ffee49f65e166e6af7e0a02a69a24
   }
   
 }

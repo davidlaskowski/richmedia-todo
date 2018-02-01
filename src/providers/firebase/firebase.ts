@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
-import { Todo } from '../../models/todo';
+import { ToDoItem } from '../../models/todo.model.ts';
 
 /*
   Generated class for the FirebaseProvider provider.
@@ -19,7 +19,7 @@ export class FirebaseProvider {
     return this.angularFireDatabase.list('/todo/');
   }
  
-  addItem(todoItem: Todo) {
+  addItem(todoItem: ToDoItem) {
     this.angularFireDatabase.list('/todo/').push(todoItem);
   }
  
