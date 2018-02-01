@@ -7,17 +7,27 @@
 
 
 <ion-content padding>
-	<p>{{ todo.name }}</p>
-	<p>{{ todo.description }}</p>
-	<form #form="ngForm" (ngSubmit)="logForm(form)" novalidate>
+
+	<ion-list>
+    <ion-item-sliding *ngFor="let item of todoItems | async">
+      <ion-item>
+        {{ item.name }}
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="danger" icon-only (click)="removeItem(item.$key)"><ion-icon name="trash"></ion-icon></button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+	<form #form="ngForm" novalidate>
 		<ion-item>
 			<ion-label>Todo</ion-label>
-			<ion-input type="text" requiered [(ngModel)]="todo.name" ngControl="name" name="name"></ion-input>
+			<ion-input type="text" requiered [(ngModel)]="newTodo.name" ngControl="name" name="name"></ion-input>
 		</ion-item>
 		<ion-item>
 			<ion-label>Description</ion-label>
-			<ion-textarea [(ngModel)]="todo.description" ngControl="description" name="description"></ion-textarea>
+			<ion-textarea [(ngModel)]="newTodo.description" ngControl="description" name="description"></ion-textarea>
 		</ion-item>
-		<button ion-button type="submit">Submit</button>
+		<button ion-button (click)="addTodo()">Submit</button>
 	</form>
 </ion-content>

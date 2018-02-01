@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { Todo } from '../../models/todo';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { AngularFireDatabase, AngularFireList} from 'angularfire2/database'; 
+import { Observable } from 'rxjs/Observable';
+import { FirebaseProvider } from '../../providers/firebase/firebase';
 
 /**
  * Generated class for the AddPage page.
@@ -17,24 +20,23 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 })
 
 export class AddPage {
-	todo: Todo;
+  todoItems: Observable<any[]>;
+  newTodo = {} as Todo;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder) {
-     this.todo = {
-       name: '',
-       description: ''
-     }
-  }
-
-  logForm(){
+  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, public firebaseProvider: FirebaseProvider) {
+     this.todoItems = this.firebaseProvider.getAll().valueChanges();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddPage');
   }
 
-  test(){
-  	//this.navCtrl.pop(this); 
+  addTodo(){
+    this.firebaseProvider.addItem(this.newTodo);
+  }
+
+  removeTodo(){
+    
   }
   
 }
