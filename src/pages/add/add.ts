@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ToDoItem } from '../../models/todo.model';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { AngularFireDatabase, AngularFireList} from 'angularfire2/database'; 
 import { Observable } from 'rxjs/Observable';
@@ -13,7 +13,6 @@ import { FirebaseProvider } from '../../providers/firebase/firebase';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-add',
   templateUrl: 'add.html',

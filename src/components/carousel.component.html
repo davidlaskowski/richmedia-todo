@@ -1,0 +1,26 @@
+<div class="carousel-container">
+  <ion-list class="carousel">
+    <div swipeAll class="carousel-slide-item" 
+    *ngFor="let item of items"
+    
+    
+    [ngStyle]="{'transform': 'rotateX(-'+item.currentPlacement+'deg)  translateZ('+radius+'px)', '-webkit-transform': 'rotateX(-'+item.currentPlacement+'deg)  translateZ('+radius+'px)', '-ms-transform': 'rotateX(-'+item.currentPlacement+'deg)  translateZ('+radius+'px)', 
+    '-o-transform': 'rotateX(-'+item.currentPlacement+'deg)  translateZ('+radius+'px)'}"
+    (swipeup)="swipeUp($event)"
+    (swipedown)="swipeDown($event)"
+    
+    >
+    <div class="slide-wrapper" [style.background-color]="item.color" (click)="showDetails(item)" (swipeleft)="moveLeft($event,item)" (swiperight)="moveRight($event)">
+      <div class="slide-item slide-item-index">
+        <p>{{item.idx+1}}</p>  
+      </div>
+      <div class="slide-item slide-item-name"> 
+        <p>{{item.name}}</p>
+      </div>
+    </div>
+    <div class="slide-option">
+        <button ion-button full large color="dark" (click)="delete(item.idx)"><ion-icon name="trash"></ion-icon></button>
+    </div>
+  </div>
+</ion-list>
+</div>
