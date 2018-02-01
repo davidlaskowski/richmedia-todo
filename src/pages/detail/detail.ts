@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { ToDo } from '../../models/todo';
+import { ToDoItem } from '../../models/todo.model';
+import { AddPage } from '../add/add';
 
 
 /**
@@ -18,7 +19,7 @@ import { ToDo } from '../../models/todo';
 })
 export class DetailPage {
 
-	private toDoItem: ToDo;
+	private toDoItem: ToDoItem;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   	this.toDoItem = this.navParams.get('item');
@@ -31,6 +32,10 @@ export class DetailPage {
   }
 
   goBack(){
-  	this.navCtrl.pop(this);
+  	this.navCtrl.pop({animation: 'md-transition',duration: 500});
+  }
+
+  goToAdd() {
+    this.navCtrl.push(AddPage, {'item': this.toDoItem});
   }
 }

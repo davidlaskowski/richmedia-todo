@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ToDo } from '../../models/todo';
+import { ToDoItem } from '../../models/todo.model';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
@@ -17,7 +17,7 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 })
 
 export class AddPage {
-	private toDoItem: ToDo;
+	private toDoItem: ToDoItem;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder) {
      this.toDoItem = {
