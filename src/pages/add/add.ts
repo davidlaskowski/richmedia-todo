@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Todo } from '../../models/todo';
+import { ToDoItem } from '../../models/todo.model';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { AngularFireDatabase, AngularFireList} from 'angularfire2/database'; 
@@ -20,6 +20,7 @@ import { FirebaseProvider } from '../../providers/firebase/firebase';
 })
 
 export class AddPage {
+<<<<<<< HEAD
   todoItems: Observable<any[]>;
   newTodo = {} as Todo;
 
@@ -37,6 +38,22 @@ export class AddPage {
 
   removeTodo(){
     
+=======
+	private toDoItem: ToDoItem;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder) {
+     this.toDoItem = {
+       name: '',
+       description: ''
+     }
+  }
+
+  logForm(){
+  }
+
+  test(){
+  	//this.navCtrl.pop(this); 
+>>>>>>> 9a75c688f94ffee49f65e166e6af7e0a02a69a24
   }
   
 }

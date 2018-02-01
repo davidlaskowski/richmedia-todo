@@ -1,14 +1,16 @@
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
+	<ion-navbar color="primary">
+		<ion-title>Home</ion-title>
+	</ion-navbar>
 
 </ion-header>
 
 <ion-content>
-  	<carousel [slides]="slides"></carousel>
-  	<ion-fab right bottom>
-   <button ion-fab (click)="goToAdd()">+</button>
- </ion-fab>
+	<img class="blur" src="../../assets/imgs/blur.png">
+	<div style="height: 38%;"></div>
+	<carousel [slides]="slides"></carousel>
+	<ion-fab right bottom>
+		<button ion-fab (click)="goToAdd()"><ion-icon name="add"></ion-icon></button>
+	</ion-fab>
 </ion-content>

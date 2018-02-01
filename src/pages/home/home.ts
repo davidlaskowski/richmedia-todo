@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
+
 import { AddPage } from '../add/add';
 import { CarouselComponent } from "../../components/carousel.component";
 
@@ -10,93 +11,84 @@ import { CarouselComponent } from "../../components/carousel.component";
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
 
   }
-
+  //max Objects 15
   private slides = [{
-      id: 4,
+      name: '1. Objekt',
       description: 'Ashutosh',
       color: '#630460',
-      isSelected: false,
     },
     {
-      id: 1,
+      name: '2. Objekt',
       description: 'Saina',
       color: '#0072bc',
-      isSelected: false,
     },
     {
-      id: 2,
+      name: '3. Objekt',
       description: 'Sakshi',
       color: '#39b54a',
-      isSelected: false,
     },
     {
-      id: 3,
+      name: '4. Objekt',
       description: 'Sushil',
       color: '#f26522',
-      isSelected: false,
     },
     {
-      id: 4,
+      name: '5. Objekt',
       description: 'Sindhu',
       color: '#ed1c24',
-      isSelected: false,
     },
     {
-      id: 4,
+      name: '6. Objekt',
       description: 'Sindhu',
       color: '#ed1c24',
-      isSelected: false,
     },
     {
-      id: 4,
-      description: 'Sindhu',
-      color: '#ed1c24',
-      isSelected: false,
+      name: '7. Objekt',
+      description: 'Ashutosh',
+      color: '#630460',
     },
     {
-      id: 4,
-      description: 'Sindhu',
-      color: '#ed1c24',
-      isSelected: false,
+      name: '8. Objekt',
+      description: 'Saina',
+      color: '#0072bc',
     },
     {
-      id: 4,
-      description: 'Sindhu',
-      color: '#ed1c24',
-      isSelected: false,
+      name: '9. Objekt',
+      description: 'Sakshi',
+      color: '#39b54a',
     },
     {
-      id: 4,
-      description: 'Sindhu',
-      color: '#ed1c24',
-      isSelected: false,
+      name: '10. Objekt',
+      description: 'Sushil',
+      color: '#f26522',
     },
     {
-      id: 4,
+      name: '11. Objekt',
       description: 'Sindhu',
       color: '#ed1c24',
-      isSelected: false,
     },
     {
-      id: 4,
-      description: 'Sindhu',
-      color: '#ed1c24',
-      isSelected: false,
+      name: '12. Objekt',
+      description: 'Ashutosh',
+      color: '#630460',
     },
     {
-      id: 4,
-      description: 'Sindhu',
-      color: '#ed1c24',
-      isSelected: false,
+      name: '13. Objekt',
+      description: 'Saina',
+      color: '#0072bc',
     },
     {
-      id: 4,
-      description: 'Sindhu',
-      color: '#ed1c24',
-      isSelected: false,
+      name: '14. Objekt',
+      description: 'Sakshi',
+      color: '#39b54a',
+    },
+    {
+      name: '15. Objekt',
+      description: 'Sushil',
+      color: '#f26522',
     }
   ];
 
