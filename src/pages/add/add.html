@@ -14,26 +14,53 @@
 
 <ion-content padding>
 
-	<ion-list>
+	<!-- <ion-list>
     <ion-item-sliding *ngFor="let item of todoItems | async">
       <ion-item>
-        {{ item.name }}
+        {{ item.name }} | {{ item.description }} | {{ item.color }}
       </ion-item>
       <ion-item-options side="right">
         <button ion-button color="danger" icon-only (click)="removeItem(item.$key)"><ion-icon name="trash"></ion-icon></button>
       </ion-item-options>
     </ion-item-sliding>
-  </ion-list>
+  </ion-list> -->
 
-	<form #form="ngForm" novalidate>
-		<ion-item>
-			<ion-label>Todo</ion-label>
-			<ion-input type="text" requiered [(ngModel)]="newTodo.name" ngControl="name" name="name"></ion-input>
-		</ion-item>
-		<ion-item>
-			<ion-label>Description</ion-label>
-			<ion-textarea [(ngModel)]="newTodo.description" ngControl="description" name="description"></ion-textarea>
-		</ion-item>
-		<button ion-button (click)="addTodo()">Submit</button>
-	</form>
+  <form #form="ngForm" novalidate>
+    <ion-item>
+     <ion-label stacked>Todo</ion-label>
+     <ion-input type="text" requiered [(ngModel)]="newTodo.name" ngControl="name" name="name"></ion-input>
+   </ion-item>
+   <ion-item>
+     <ion-label stacked>Description</ion-label>
+     <ion-textarea [(ngModel)]="newTodo.description" ngControl="description" name="description"></ion-textarea>
+   </ion-item>
+   <ion-item>
+    <ion-label stacked>Color</ion-label>
+    <ion-input [value]="color"
+    [style.background]="color"
+    [cpPosition]="'bottom'"
+    [(colorPicker)]="color"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label stacked>Priority</ion-label>
+    <ion-select [(ngModel)]="newTodo.priority" multiple="true" ngControl="priority" name="priority">
+      <ion-option>1</ion-option>
+      <ion-option>2</ion-option>
+      <ion-option>3</ion-option>
+      <ion-option>4</ion-option>
+      <ion-option>5</ion-option>
+      <ion-option>6</ion-option>
+      <ion-option>7</ion-option>
+      <ion-option>8</ion-option>
+      <ion-option>9</ion-option>
+      <ion-option>10</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label stacked>DueDate</ion-label>
+    <ion-input type="date" [(ngModel)]="newTodo.duedate" ngControl="duedate" name="duedate"></ion-input>
+  </ion-item>
+
+  <button ion-button (click)="addTodo()">Submit</button>
+</form>
 </ion-content>

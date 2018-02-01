@@ -90,6 +90,7 @@ export class CarouselComponent {
   delete(index: number) {
     if(this.items[index].currentPlacement == this.currentDeg){
 
+
       this.items.splice(index, 1);
       this.repairCarousel(index);
 
