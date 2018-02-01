@@ -9,29 +9,7 @@ import { SlideItem } from '../models/slider.model';
 
 @Component({
   selector: 'carousel',
-  template: `
-  <div class="carousel-container">
-  <ion-list class="carousel">
-  <div swipeAll class="carousel-slide-item" 
-  *ngFor="let item of items"
-  [style.background-color]="item.color"
-  (click)="showDetails(item)" 
-  [ngStyle]="{'transform': 'rotateX(-'+item.currentPlacement+'deg)  translateZ('+radius+'px)', '-webkit-transform': 'rotateX(-'+item.currentPlacement+'deg)  translateZ('+radius+'px)', '-ms-transform': 'rotateX(-'+item.currentPlacement+'deg)  translateZ('+radius+'px)', 
-  '-o-transform': 'rotateX(-'+item.currentPlacement+'deg)  translateZ('+radius+'px)'}"
-  (swipeup)="swipeUp($event);"
-  (swipedown)="swipeDown($event);"
-  (swipeleft)="delete(item.idx);"
-  >
-  <div class="slide-item slide-item-index">
-    <p>{{item.idx+1}}</p>  
-  </div>
-  <div class="slide-item slide-item-name"> 
-    <p>{{item.name}}</p>
-  </div>
-  </div>
-  </ion-list>
-  </div>
-  `
+  templateUrl: 'carousel.component.html'
 })
 export class CarouselComponent {
   private currentDeg: number = 0;
@@ -47,14 +25,16 @@ export class CarouselComponent {
     this.theta = 360 / values.length;
     this.radius = 400;//Math.round((this.containerHeight / 2) / Math.tan(Math.PI / values.length));
     this.items = <Array<SlideItem>>values.map((item: ToDoItem, index: number) => {
-      let slideItem: SlideItem = {
-        idx: index,
-        name: item.name,
-        description: item.description,
-        color: 'hsla(-' + this.theta*index + ', 90%, 50%, 0.95)',
-        currentPlacement: this.theta * index
-      };
-      return slideItem;
+      if(index<15){
+        let slideItem: SlideItem = {
+          idx: index,
+          name: item.name,
+          description: item.description,
+          color: 'hsla(-' + this.theta*index + ', 90%, 50%, 0.95)',
+          currentPlacement: this.theta * index
+        };
+        return slideItem;
+      }
     })
     this.currentDeg = Math.round( this.currentDeg / this.theta ) * this.theta;
     this.applyStyle();
@@ -64,14 +44,16 @@ export class CarouselComponent {
 
   }
 
-  swipeDown() {
+  swipeDown(event) {
     this.currentDeg -= this.theta;
     this.applyStyle();
+    this.moveRight(event);
   }
 
-  swipeUp() {
+  swipeUp(event) {
     this.currentDeg += this.theta;
     this.applyStyle();
+    this.moveRight(event);
   }
 
   private applyStyle() {
@@ -93,8 +75,6 @@ export class CarouselComponent {
 
       this.items.splice(index, 1);
       this.repairCarousel(index);
-
-      console.log("Item gelöscht"+ index);
     }
   }
 
@@ -117,5 +97,32 @@ export class CarouselComponent {
     }
     
   }
+
+  moveLeft(event, item: any) {
+    if(item.currentPlacement == this.currentDeg){
+      let ele = event.target;
+      if(!ele.classList.contains('slide-wrapper')){
+        ele = ele.closest(".slide-wrapper");
+      }
+      let but = ele.nextSibling.nextSibling;
+      ele.classList.add('active');
+      but.classList.add('button-active');
+    }
+  }
+
+  moveRight(event) {
+    
+      let ele = event.target;
+      if(!ele.classList.contains('slide-wrapper')){
+        ele = ele.closest(".slide-wrapper");
+      } 
+      let but = ele.nextSibling.nextSibling;
+  
+      ele.classList.remove('active')
+      setTimeout(() => {but.classList.remove('button-active')}, 500);
+      
+    
+  }
+
 
 } 
