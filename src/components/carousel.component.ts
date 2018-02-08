@@ -77,6 +77,7 @@ export class CarouselComponent {
 
   delete(index: number) {
 
+
       this.items.splice(index, 1);
       this.currentDeg += this.theta;
       this.applyStyle();

@@ -4,9 +4,8 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { IonicSwipeAllModule } from 'ionic-swipe-all';
-
-
 import { AngularFireModule } from 'angularfire2';
+
 const firebaseConfig = {
     apiKey: "AIzaSyCTUi0ANMofysl-7YKVcFRvNTVcLSCHNtk",
     authDomain: "todo-8d4f0.firebaseapp.com",
@@ -49,6 +48,7 @@ import { FirebaseProvider } from '../providers/firebase/firebase';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     IonicSwipeAllModule
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [

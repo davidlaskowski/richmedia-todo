@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { ToDoItem } from '../../models/todo.model';
 import { NavController, NavParams } from 'ionic-angular';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { AngularFireDatabase, AngularFireList} from 'angularfire2/database'; 
 import { Observable } from 'rxjs/Observable';
 import { FirebaseProvider } from '../../providers/firebase/firebase';
+//import { DatePicker } from '@ionic-native/date-picker';
 
 /**
  * Generated class for the AddPage page.
@@ -19,10 +19,13 @@ import { FirebaseProvider } from '../../providers/firebase/firebase';
 })
 
 export class AddPage {
+  public color: string = '#ffa500';
+  public colors: Array<string> = ['#ff0000','#00ff00','#0000ff'];
+
   todoItems: Observable<any[]>;
   newTodo = {} as ToDoItem;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, public firebaseProvider: FirebaseProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,  public firebaseProvider: FirebaseProvider) {
      this.todoItems = this.firebaseProvider.getAll().valueChanges();
   }
 

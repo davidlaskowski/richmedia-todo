@@ -24,7 +24,7 @@ carousel {
     color: #FFF;
     border-radius: 10px;
     top: 10px;
-    font-size: 20px;
+    font-size: 100%;
     text-align: center;
     overflow: hidden;
   }
@@ -47,6 +47,8 @@ carousel {
 
   .slide-item p {
     margin: 40px auto;
+    min-width: 70px;
+    font-size: 100%;
   }
 
   .slide-wrapper {
