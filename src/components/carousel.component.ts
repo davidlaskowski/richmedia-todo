@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, ElementRef, QueryList, ContentChildren } from '@angular/core';
 import { IonicSwipeAllModule } from 'ionic-swipe-all';
-import { NavController, NavParams } from 'ionic-angular';
+import { Events, NavController, NavParams } from 'ionic-angular';
 
 import { DetailPage } from "../pages/detail/detail";
 import { ToDoItem } from '../models/todo.model';
@@ -22,6 +22,16 @@ export class CarouselComponent {
   @Input() set slides(values: Array<ToDoItem>) {
     if (!values.length) return;
 
+    this.setSlides(values);    
+  }
+
+  constructor(private eleRef: ElementRef, public navCtrl: NavController, public navParams: NavParams, private events: Events) {
+      this.events.subscribe('test', (values) => {
+        this.setSlides(values);
+      })
+  }
+
+  setSlides(values: Array<ToDoItem>){
     this.theta = 360 / values.length;
     this.radius = 400;//Math.round((this.containerHeight / 2) / Math.tan(Math.PI / values.length));
     this.items = <Array<SlideItem>>values.map((item: ToDoItem, index: number) => {
@@ -30,7 +40,7 @@ export class CarouselComponent {
           idx: index,
           name: item.name,
           description: item.description,
-          color: 'hsla(-' + this.theta*index + ', 90%, 50%, 0.95)',
+          color: 'hsla(' + this.theta*index/3 + ', 90%, 50%, 0.95)',
           currentPlacement: this.theta * index
         };
         return slideItem;
@@ -40,10 +50,6 @@ export class CarouselComponent {
     this.applyStyle();
   }
 
-  constructor(private eleRef: ElementRef, public navCtrl: NavController, public navParams: NavParams) {
-
-  }
-
   swipeDown(event) {
     this.currentDeg -= this.theta;
     this.applyStyle();
@@ -51,7 +57,7 @@ export class CarouselComponent {
   }
 
   swipeUp(event) {
-    this.currentDeg += this.theta;
+    this.currentDeg += this.theta
     this.applyStyle();
     this.moveRight(event);
   }
@@ -65,25 +71,27 @@ export class CarouselComponent {
   }
 
   showDetails(item: any){
-    if(item.currentPlacement == this.currentDeg)
+    if(Math.round((item.currentPlacement%360) + Math.abs(this.currentDeg%360)) == 360 || Math.round(item.currentPlacement%360) == Math.round(this.currentDeg%360))
       this.navCtrl.push(DetailPage, {'item': item}, {animation: 'md-transition',duration: 1000});
   }
 
   delete(index: number) {
-    if(this.items[index].currentPlacement == this.currentDeg){
 
       this.items.splice(index, 1);
-      this.repairCarousel(index);
-    }
+      this.currentDeg += this.theta;
+      this.applyStyle();
+      setTimeout( () => {this.repairCarousel(index%this.items.length)},27);
+    
   }
 
   repairCarousel(index: number) {
+    if(!this.items.length)
+      return;
     this.theta = 360 / this.items.length;
     var i;
     var j = 0;
     var pos = this.items[index].currentPlacement;
-    this.currentDeg = pos;
-    this.applyStyle();
+    
 
     for(i=index; i < this.items.length; i++){
       this.items[i].idx = i;
@@ -98,7 +106,7 @@ export class CarouselComponent {
   }
 
   moveLeft(event, item: any) {
-    if(item.currentPlacement == this.currentDeg){
+    if(Math.round((item.currentPlacement%360) + Math.abs(this.currentDeg%360)) == 360 || Math.round(item.currentPlacement%360) == Math.round(this.currentDeg%360)){
       let ele = event.target;
       if(!ele.classList.contains('slide-wrapper')){
         ele = ele.closest(".slide-wrapper");
@@ -110,11 +118,11 @@ export class CarouselComponent {
   }
 
   moveRight(event) {
-    
       let ele = event.target;
       if(!ele.classList.contains('slide-wrapper')){
         ele = ele.closest(".slide-wrapper");
       } 
+
       let but = ele.nextSibling.nextSibling;
   
       ele.classList.remove('active')

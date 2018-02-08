@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 
 import { AddPage } from '../add/add';
 import { CarouselComponent } from "../../components/carousel.component";
+import { Events } from 'ionic-angular';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { CarouselComponent } from "../../components/carousel.component";
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private events: Events) {
 
   }
   //max Objects 15
@@ -96,5 +97,10 @@ export class HomePage {
     this.navCtrl.push(AddPage);
   }
 
+  test(){
+    this.slides.pop();
+    console.log(this.slides)
+    this.events.publish('test', this.slides);
+  }
 
 }
