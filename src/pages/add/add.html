@@ -45,23 +45,28 @@
   <ion-item>
     <ion-label stacked>Priority</ion-label>
     <ion-select [(ngModel)]="newTodo.priority" multiple="true" ngControl="priority" name="priority">
-      <ion-option>1</ion-option>
-      <ion-option>2</ion-option>
-      <ion-option>3</ion-option>
-      <ion-option>4</ion-option>
-      <ion-option>5</ion-option>
-      <ion-option>6</ion-option>
-      <ion-option>7</ion-option>
-      <ion-option>8</ion-option>
-      <ion-option>9</ion-option>
-      <ion-option>10</ion-option>
+      <ion-option *ngFor="let item of priorities">{{ item }}</ion-option>
     </ion-select>
   </ion-item>
   <ion-item>
     <ion-label stacked>DueDate</ion-label>
     <ion-input type="date" [(ngModel)]="newTodo.duedate" ngControl="duedate" name="duedate"></ion-input>
   </ion-item>
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let item of colors" col-3>
+        <div class="color-item" style.background="{{item}}" attr.data-color="{{item}}" (click)="selectColor($event)"></div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col *ngFor="let item of priorities">
+        <div class="priority-item">{{item}}</div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
   <button ion-button (click)="addTodo()">Submit</button>
+  <button ion-button (click)="goToHome()">Go to home</button>
 </form>
 </ion-content>
