@@ -9,21 +9,13 @@ import { Events } from 'ionic-angular';
 
 import { HomePage } from '../home/home';
 
-/**
- * Generated class for the AddPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @Component({
   selector: 'page-add',
   templateUrl: 'add.html',
 })
 
 export class AddPage {
-  public color: string = '#ffa500';
-  public colors: Array<string> = ['#ff0000','#00ff00','#0000ff','#ff0000','#00ff00','#0000ff','#ff0000','#00ff00','#0000ff','#ff0000'];
+  public colors: Array<string> = ['#1A237E','#311B92','#0D47A1','#01579B','#006064'];
   
   todoItems: Observable<any[]>;
   newTodo = {} as ToDoItem;
@@ -60,18 +52,14 @@ export class AddPage {
      }
   }
 
-//
-  //  this.newTodo.color = document.querySelector('.color-item.selected').getAttribute('data-color');
-   // this.firebaseProvider.addItem(this.newTodo);
- // }
-
-  selectColor(event){
+  selectColor(event, item){
     let elements = Array.from(document.querySelectorAll('.color-item'));
     elements.forEach(node =>{
       node.classList.remove('selected');
     })
 
-    event.target.classList.add("selected")
-    console.log(document.querySelector('.color-item.selected').getAttribute('data-color'));
+    event.target.classList.add("selected");
+    this.newTodo.color = item;
+    console.log(this.newTodo);
   }
 }

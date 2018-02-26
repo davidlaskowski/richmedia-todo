@@ -1,76 +1,45 @@
-<!--
-  Generated template for the AddPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
+  <ion-navbar>
+    Todo hinzufügen
 
-	<ion-navbar>
-
-	</ion-navbar>
+  </ion-navbar>
 
 </ion-header>
 
-<ion-content padding>
+<ion-content>
+  <ion-list inset>
 
-	<!-- <ion-list>
-    <ion-item-sliding *ngFor="let item of todoItems | async">
-      <ion-item>
-        {{ item.name }} | {{ item.description }} | {{ item.color }}
-      </ion-item>
-      <ion-item-options side="right">
-        <button ion-button color="danger" icon-only (click)="removeItem(item.$key)"><ion-icon name="trash"></ion-icon></button>
-      </ion-item-options>
-    </ion-item-sliding>
-</ion-list> -->
+    <ion-item>
+      <ion-label>Name</ion-label>
+      <ion-input type="text" requiered [(ngModel)]="newTodo.name" ngControl="name" name="name"></ion-input>
+    </ion-item>
 
-<form #form="ngForm" novalidate>
-	<ion-item>
-		<ion-label stacked>Todo</ion-label>
-		<ion-input type="text" requiered [(ngModel)]="newTodo.name" ngControl="name" name="name"></ion-input>
-	</ion-item>
-	<ion-item>
-		<ion-label stacked>Description</ion-label>
-		<ion-textarea [(ngModel)]="newTodo.description" ngControl="description" name="description"></ion-textarea>
-	</ion-item>
-   <!-- <ion-item>
-    <ion-label stacked>Color</ion-label>
-    <ion-input [value]="color"
-    [style.background]="color"
-    [cpPosition]="'bottom'"
-    [(colorPicker)]="color"></ion-input>
-<<<<<<< HEAD
-</ion-item> -->
+    <ion-item>
+      <ion-label>Beschreibung</ion-label>
+      <ion-input [(ngModel)]="newTodo.description" ngControl="description" name="description"></ion-input>
+    </ion-item>
+    <ion-label>Priority <ion-badge item-end style="float: right;">{{newTodo.priority}}</ion-badge></ion-label>
 
-<ion-item>
-	<ion-label stacked>Priority <ion-badge item-end style="float: right;">{{newTodo.priority}}</ion-badge></ion-label>
-
-	<ion-range min="1" max="10" [(ngModel)]="newTodo.priority" ngControl="priority" name="priority">
-		<ion-label range-left>1</ion-label>
-		<ion-label range-right>10</ion-label>
-	</ion-range>
-</ion-item>
-<ion-item>
-	<ion-label stacked>DueDate</ion-label>
-	<ion-input type="date" [(ngModel)]="newTodo.duedate" ngControl="duedate" name="duedate"></ion-input>
-</ion-item>
+    <ion-range min="1" max="10" [(ngModel)]="newTodo.priority" ngControl="priority" name="priority">
+      <ion-label range-left>1</ion-label>
+      <ion-label range-right>10</ion-label>
+    </ion-range>
+  <ion-item>
+    <ion-label>DueDate</ion-label>
+    <ion-input type="date" [(ngModel)]="newTodo.duedate" ngControl="duedate" name="duedate"></ion-input>
+  </ion-item>
 
   <ion-grid>
     <ion-row>
-      <ion-col *ngFor="let item of colors" col-3>
-        <div class="color-item" style.background="{{item}}" attr.data-color="{{item}}" (click)="selectColor($event)"></div>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col *ngFor="let item of priorities">
-        <div class="priority-item">{{item}}</div>
+      <ion-col *ngFor="let item of colors" col-2>
+        <div class="color-item" style.background="{{item}}" (click)="selectColor($event,item)">
+          <ion-icon class='icon' name='ios-checkmark'></ion-icon>
+        </div> 
       </ion-col>
     </ion-row>
   </ion-grid>
-
-  <button ion-button (click)="addTodo()">Submit</button>
-
-</form>
+</ion-list>
+<div padding>
+  <button ion-button block (click)="addTodo()">Hinzufügen</button>  
+</div>
 </ion-content>
