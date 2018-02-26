@@ -41,7 +41,7 @@ export class AddPage {
        this.newTodo.name = this.navParams.get('name');
        this.newTodo.description = this.navParams.get('description');
        this.newTodo.priority = this.navParams.get('priority');
-       //this.newTodo.duedate = this.navParams.get('duedate');
+       this.newTodo.duedate = this.navParams.get('duedate');
        this.newTodo.estimatedTime = this.navParams.get('estimatedTime');
        
        this.edit = true;

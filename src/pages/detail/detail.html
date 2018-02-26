@@ -13,26 +13,27 @@
 	<ion-fab left top edge>
 		<button mini ion-fab (click)="goToAdd()"><ion-icon name="create"></ion-icon></button>
 	</ion-fab>
-	<div class="item item-description" (click)="goBack()">
-		<div id="description">
-			<div class="item-description-icon"><ion-icon name="ios-information-circle-outline"></ion-icon></div>
-			<div class="item-description-text"> <p> {{toDoItem.description}} </p> </div>
-		</div>
-		<div id="priority">
-			<div class="item-description-icon"><ion-icon name="ios-speedometer-outline"></ion-icon></div>
-			<div class="item-description-text"> <p> {{toDoItem.priority}} </p> </div>
-		</div>
-		<div id="duedate">	
-			<div class="item-description-icon"><ion-icon name="ios-calendar-outline"></ion-icon></div>
-			<div class="item-description-text"> <p> {{toDoItem.duedate}} </p> </div>
-		</div>
-		<div id="estimatedTime">
-			<div class="item-description-icon"><ion-icon name="ios-timer-outline"></ion-icon></div>
-			<div class="item-description-text"> <p> {{toDoItem.estimatedTime}} </p> </div>
-		</div>
-		<div id="color">
-			<div class="item-description-icon"><ion-icon name="ios-color-fill-outline"></ion-icon></div>
-			<div class="item-description-text"> <div class="colorDiv" [ngStyle]="{'background-color': toDoItem.color}"></div></div>
-		</div>
+	<div class="item-description" (click)="goBack()">
+		
+		<ion-item class="item">
+			<ion-label class="item-description-icon"><ion-icon name="ios-information-circle-outline"></ion-icon></ion-label><ion-input readonly [(ngModel)]="toDoItem.description"> </ion-input>
+		</ion-item>
+		<ion-item class="item">
+			<ion-label class="item-description-icon"><ion-icon name="ios-speedometer-outline"></ion-icon></ion-label>
+			<ion-input readonly [(ngModel)]="toDoItem.priority"></ion-input>
+		</ion-item>
+		<ion-item class="item">
+			<ion-label class="item-description-icon"><ion-icon name="ios-calendar-outline"></ion-icon></ion-label>
+			<ion-input readonly type="date" [(ngModel)]="toDoItem.duedate"></ion-input>
+		</ion-item>
+		<ion-item class="item">
+			<ion-label class="item-description-icon"><ion-icon name="ios-timer-outline"></ion-icon></ion-label>
+			<ion-input readonly type="time" [(ngModel)]="toDoItem.estimatedTime"></ion-input>
+		</ion-item>
+		<ion-item class="item">
+			<ion-label class="item-description-icon"><ion-icon name="ios-color-fill-outline"></ion-icon></ion-label>
+			
+			<ion-input class="colorDiv" [ngStyle]="{'background-color': toDoItem.color}" readonly></ion-input>
+		</ion-item>
 	</div>
 </ion-content>

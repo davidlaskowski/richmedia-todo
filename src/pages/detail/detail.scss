@@ -14,45 +14,36 @@ page-detail {
 		margin: auto 0 auto 20%;
 
 	}
+	
+	.item {
+		margin-top: 30px;
+	}
 
 	.item-description {
 		height: 100%;
 		width: 100%;
 		color: black;
 		background-color: white;
-		text-align: center;
+		text-align: left;
 		padding-top: 30px;
-		display: block;
+		display: inline-block;
 		font-size: 30px;
 	}
 
 	.item-description-icon {
-		width: auto;
+		width: 30%;
 		height: auto;
-		display: block;
+		font-size: 30px;
+		margin: 0 10px;
 	}
-
-	.item-description-text {
-		width: 100%;
-		height: auto;
-		display: inline-block;
-		margin: 0 10% 5% 10%;
-		text-align: left;
-	}
-
-	.item-description-text p{
-		margin: 0 10% 0 0;
-		font-size: 20px;
-	}
-
+	
 	.colorDiv {
 		width: 30px;
 		height: 30px;
 		border-radius: 5px;
+		margin: 11px 8px 11px 16px;
+		flex: none;
 	}
 
-	.disable {
-		display: none;
-	}
 }
 

@@ -20,32 +20,6 @@ import { AddPage } from '../add/add';
      });
    }
 
-//Anzeigen/Ausblenden der verschiedenen Parameter eines TODO's
-   ionViewDidEnter(){
-     if(this.toDoItem.description == undefined || this.toDoItem.description == ""){
-       let ele = document.getElementById('description');
-       ele.classList.add('disable');
-     }else{
-       let ele = document.getElementById('description');
-       ele.classList.remove('disable');
-     }
-     if(this.toDoItem.duedate == undefined || this.toDoItem.duedate == ""){
-       let ele = document.getElementById('duedate');
-       ele.classList.add('disable');
-     }else{
-       let ele = document.getElementById('duedate');
-       ele.classList.remove('disable');
-     }
-     if(this.toDoItem.estimatedTime == undefined || this.toDoItem.estimatedTime == 0){
-       let ele = document.getElementById('estimatedTime');
-       ele.classList.add('disable');
-     }else{
-       let ele = document.getElementById('estimatedTime');
-       ele.classList.remove('disable');
-     }
-
-   }
-
    goBack(){
      this.navCtrl.pop({animation: 'md-transition',duration: 500});
    }
