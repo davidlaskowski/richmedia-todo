@@ -6,9 +6,9 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+	<ion-navbar>
 
-  </ion-navbar>
+	</ion-navbar>
 
 </ion-header>
 
@@ -23,45 +23,38 @@
         <button ion-button color="danger" icon-only (click)="removeItem(item.$key)"><ion-icon name="trash"></ion-icon></button>
       </ion-item-options>
     </ion-item-sliding>
-  </ion-list> -->
+</ion-list> -->
 
-  <form #form="ngForm" novalidate>
-    <ion-item>
-     <ion-label stacked>Todo</ion-label>
-     <ion-input type="text" requiered [(ngModel)]="newTodo.name" ngControl="name" name="name"></ion-input>
-   </ion-item>
-   <ion-item>
-     <ion-label stacked>Description</ion-label>
-     <ion-textarea [(ngModel)]="newTodo.description" ngControl="description" name="description"></ion-textarea>
-   </ion-item>
+<form #form="ngForm" novalidate>
+	<ion-item>
+		<ion-label stacked>Todo</ion-label>
+		<ion-input type="text" requiered [(ngModel)]="newTodo.name" ngControl="name" name="name"></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label stacked>Description</ion-label>
+		<ion-textarea [(ngModel)]="newTodo.description" ngControl="description" name="description"></ion-textarea>
+	</ion-item>
    <!-- <ion-item>
     <ion-label stacked>Color</ion-label>
     <ion-input [value]="color"
     [style.background]="color"
     [cpPosition]="'bottom'"
     [(colorPicker)]="color"></ion-input>
-  </ion-item> -->
+</ion-item> -->
 
-  <ion-item>
-    <ion-label stacked>Priority</ion-label>
-    <ion-select [(ngModel)]="newTodo.priority" multiple="true" ngControl="priority" name="priority">
-      <ion-option>1</ion-option>
-      <ion-option>2</ion-option>
-      <ion-option>3</ion-option>
-      <ion-option>4</ion-option>
-      <ion-option>5</ion-option>
-      <ion-option>6</ion-option>
-      <ion-option>7</ion-option>
-      <ion-option>8</ion-option>
-      <ion-option>9</ion-option>
-      <ion-option>10</ion-option>
-    </ion-select>
-  </ion-item>
-  <ion-item>
-    <ion-label stacked>DueDate</ion-label>
-    <ion-input type="date" [(ngModel)]="newTodo.duedate" ngControl="duedate" name="duedate"></ion-input>
-  </ion-item>
+<ion-item>
+	<ion-label stacked>Priority <ion-badge item-end style="float: right;">{{newTodo.priority}}</ion-badge></ion-label>
 
-  <button ion-button (click)="addTodo()">Submit</button>
+	<ion-range min="1" max="10" [(ngModel)]="newTodo.priority" ngControl="priority" name="priority">
+		<ion-label range-left>1</ion-label>
+		<ion-label range-right>10</ion-label>
+	</ion-range>
+</ion-item>
+<ion-item>
+	<ion-label stacked>DueDate</ion-label>
+	<ion-input type="date" [(ngModel)]="newTodo.duedate" ngControl="duedate" name="duedate"></ion-input>
+</ion-item>
+
+<button ion-button (click)="addTodo()">Submit</button>
 </form>
 </ion-content>

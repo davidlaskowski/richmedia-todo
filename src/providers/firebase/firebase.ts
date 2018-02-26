@@ -8,22 +8,30 @@ import { ToDoItem } from '../../models/todo.model';
 
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
-*/
-@Injectable()
-export class FirebaseProvider {
+  */
+  @Injectable()
+  export class FirebaseProvider {
 
-  constructor(public angularFireDatabase: AngularFireDatabase) {
+    constructor(public angularFireDatabase: AngularFireDatabase) {
     }
 
-  getAll() {
-    return this.angularFireDatabase.list('/todo/');
+    getAll() {
+      return this.angularFireDatabase.list('/todo/');
+    }
+
+    addItem(toDoItem: ToDoItem) {
+      this.angularFireDatabase.list('/todo/').push(toDoItem).then((snap) => {
+         toDoItem.id = snap.key;
+     this.angularFireDatabase.object('/todo/'+ toDoItem.id).update(toDoItem);
+     });
+  
+    }
+
+    updateItem(toDoItem) {
+      this.angularFireDatabase.object('/todo/'+ toDoItem.id).update(toDoItem);
+    }
+
+    removeItem(id) {
+      this.angularFireDatabase.list('/todo/').remove(id);
+    }
   }
- 
-  addItem(todoItem: ToDoItem) {
-    this.angularFireDatabase.list('/todo/').push(todoItem);
-  }
- 
-  removeItem(id) {
-    this.angularFireDatabase.list('/todo/').remove(id);
-  }
-}

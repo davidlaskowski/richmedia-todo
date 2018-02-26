@@ -13,11 +13,11 @@
         <p>{{item.idx+1}}</p>  
       </div>
       <div class="slide-item slide-item-name"> 
-        <p>{{item.name}}</p>
+       <p>{{item.name}}</p>
       </div>
     </div>
     <div class="slide-option" [style.background-color]="item.color">
-        <button ion-button full large color="dark" (click)="delete(item.idx)"><ion-icon class="icon" name="ios-checkmark-circle-outline"></ion-icon></button>
+        <button ion-button full large color="dark" (click)="delete(item)"><ion-icon class="icon" name="ios-checkmark-circle-outline"></ion-icon></button>
     </div>
   </div>
 </ion-list>

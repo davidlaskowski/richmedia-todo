@@ -15,105 +15,54 @@ import { ToDoItem } from '../../models/todo.model';
 })
 export class HomePage {
   private slides = [];
-  //Observable<ToDoItem[]>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public firebaseProvider : FirebaseProvider, private events: Events) {
-      this.firebaseProvider.getAll().valueChanges().subscribe(res => {
-        console.log(res);
-        console.log(res.length);
-        if(res.length != 0){
-          this.slides = res;
-        }
-      });
-      console.log(this.slides);
+    this.firebaseProvider.getAll().valueChanges().subscribe(res => {
+      console.log(res);
+      if(res.length != 0){
+        res.forEach(this.calculatePoints);
+        res.sort(function(a: ToDoItem, b: ToDoItem){return b.points - a.points});
+        while(res.length>20)
+          res.pop();
+        
+        this.slides = res;
+      }
+    });
   }
 
-  //max Objects 15
-  // private slides = [{
-  //     name: '1. Objekt',
-  //     description: 'Ashutosh',
-  //     color: '#630460',
-  //   },
-  //   {
-  //     name: '2. Objekt',
-  //     description: 'Saina',
-  //     color: '#0072bc',
-  //   },
-  //   {
-  //     name: '3. Objekt',
-  //     description: 'Sakshi',
-  //     color: '#39b54a',
-  //   },
-  //   {
-  //     name: '4. Objekt',
-  //     description: 'Sushil',
-  //     color: '#f26522',
-  //   },
-  //   {
-  //     name: '5. Objekt',
-  //     description: 'Sindhu',
-  //     color: '#ed1c24',
-  //   },
-  //   {
-  //     name: '6. Objekt',
-  //     description: 'Sindhu',
-  //     color: '#ed1c24',
-  //   },
-  //   {
-  //     name: '7. Objekt',
-  //     description: 'Ashutosh',
-  //     color: '#630460',
-  //   },
-  //   {
-  //     name: '8. Objekt',
-  //     description: 'Saina',
-  //     color: '#0072bc',
-  //   },
-  //   {
-  //     name: '9. Objekt',
-  //     description: 'Sakshi',
-  //     color: '#39b54a',
-  //   },
-  //   {
-  //     name: '10. Objekt',
-  //     description: 'Sushil',
-  //     color: '#f26522',
-  //   },
-  //   {
-  //     name: '11. Objekt',
-  //     description: 'Sindhu',
-  //     color: '#ed1c24',
-  //   },
-  //   {
-  //     name: '12. Objekt',
-  //     description: 'Ashutosh',
-  //     color: '#630460',
-  //   },
-  //   {
-  //     name: '13. Objekt',
-  //     description: 'Saina',
-  //     color: '#0072bc',
-  //   },
-  //   {
-  //     name: '14. Objekt',
-  //     description: 'Sakshi',
-  //     color: '#39b54a',
-  //   },
-  //   {
-  //     name: '15. Objekt',
-  //     description: 'Sushil',
-  //     color: '#f26522',
-  //   }
-  // ];
-
-  goToAdd(){
-    this.navCtrl.push(AddPage);
+//Algorithmus zur Ermittelung der Wertigkeiten eines TODO's
+calculatePoints(item: ToDoItem){
+  var daysleft;
+  var currentDate = new Date();
+  var currentTime = currentDate.getTime();
+  if(item.duedate!=undefined){
+    var dueDate = new Date(item.duedate);
+    var dueTime = dueDate.getTime();
+    daysleft = Math.round((dueTime - currentTime)/86400000);
   }
 
-  test(){
-    this.slides.pop();
-    console.log(this.slides)
-    this.events.publish('test', this.slides);
+  if(item.estimatedTime==undefined||item.estimatedTime==0){
+    if(daysleft<=0||daysleft==undefined){
+      item.points = Math.pow(item.priority, 2);
+    }else{
+      item.points = Math.pow(item.priority, 3)/(Math.sqrt(daysleft));
+      if(daysleft<item.priority)
+        item.points += daysleft * (item.priority - daysleft);
+    }
+  }else{
+    if(daysleft<=0||daysleft==undefined){
+      console.log("was soll das");
+      item.points = item.priority * item.estimatedTime / 2;
+    }else{
+      item.points = Math.pow(item.priority,2) * item.estimatedTime / daysleft;
+      if(daysleft<item.priority)
+        item.points += daysleft * (item.priority - daysleft);
+    }
   }
+}
+//Umleitung auf die Hinzufügen-Seite 
+goToAdd(){
+  this.navCtrl.push(AddPage);
+}
 
 }
