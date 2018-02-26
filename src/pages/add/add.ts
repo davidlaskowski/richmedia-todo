@@ -47,9 +47,11 @@ export class AddPage {
   selectColor(event){
     let elements = Array.from(document.querySelectorAll('.color-item'));
     elements.forEach(node =>{
+      node.innerHTML = "";
       node.classList.remove('selected');
     })
 
+    event.target.innerHTML = "✓";
     event.target.classList.add("selected")
     console.log(document.querySelector('.color-item.selected').getAttribute('data-color'));
   }

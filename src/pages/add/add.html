@@ -7,14 +7,15 @@
 <ion-header>
 
   <ion-navbar>
+    Todo hinzufügen
 
   </ion-navbar>
 
 </ion-header>
 
-<ion-content padding>
+<ion-content>
 
-	<!-- <ion-list>
+  <!-- <ion-list>
     <ion-item-sliding *ngFor="let item of todoItems | async">
       <ion-item>
         {{ item.name }} | {{ item.description }} | {{ item.color }}
@@ -24,49 +25,44 @@
       </ion-item-options>
     </ion-item-sliding>
   </ion-list> -->
-
-  <form #form="ngForm" novalidate>
-    <ion-item>
-     <ion-label stacked>Todo</ion-label>
+  <ion-list inset>
+  
+  <ion-item>
+    <ion-label>Name</ion-label>
      <ion-input type="text" requiered [(ngModel)]="newTodo.name" ngControl="name" name="name"></ion-input>
-   </ion-item>
-   <ion-item>
-     <ion-label stacked>Description</ion-label>
-     <ion-textarea [(ngModel)]="newTodo.description" ngControl="description" name="description"></ion-textarea>
-   </ion-item>
-   <!-- <ion-item>
-    <ion-label stacked>Color</ion-label>
-    <ion-input [value]="color"
-    [style.background]="color"
-    [cpPosition]="'bottom'"
-    [(colorPicker)]="color"></ion-input>
-  </ion-item> -->
+  </ion-item>
 
   <ion-item>
-    <ion-label stacked>Priority</ion-label>
-    <ion-select [(ngModel)]="newTodo.priority" multiple="true" ngControl="priority" name="priority">
+    <ion-label>Beschreibung</ion-label>
+     <ion-textarea [(ngModel)]="newTodo.description" ngControl="description" name="description"></ion-textarea>
+  </ion-item>
+  <ion-item>
+    <ion-label>Priorität</ion-label>
+    <ion-select [(ngModel)]="newTodo.priority" ngControl="priority" name="priority">
       <ion-option *ngFor="let item of priorities">{{ item }}</ion-option>
     </ion-select>
   </ion-item>
   <ion-item>
-    <ion-label stacked>DueDate</ion-label>
+     <ion-label>Deadline</ion-label>
     <ion-input type="date" [(ngModel)]="newTodo.duedate" ngControl="duedate" name="duedate"></ion-input>
   </ion-item>
-  <ion-grid>
+  <ion-item>
+    <ion-grid>
     <ion-row>
-      <ion-col *ngFor="let item of colors" col-3>
+      <ion-col *ngFor="let item of colors" col-2>
         <div class="color-item" style.background="{{item}}" attr.data-color="{{item}}" (click)="selectColor($event)"></div>
       </ion-col>
     </ion-row>
-
-    <ion-row>
-      <ion-col *ngFor="let item of priorities">
-        <div class="priority-item">{{item}}</div>
-      </ion-col>
-    </ion-row>
   </ion-grid>
+</ion-item>
+</ion-list>
+<div padding>
+  <button ion-button block (click)="addTodo()">Hinzufügen</button>  
+</div>
 
-  <button ion-button (click)="addTodo()">Submit</button>
-  <button ion-button (click)="goToHome()">Go to home</button>
-</form>
+
+  
+  
+
+  
 </ion-content>
