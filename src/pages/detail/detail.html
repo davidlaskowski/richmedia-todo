@@ -13,9 +13,26 @@
 	<ion-fab left top edge>
 		<button mini ion-fab (click)="goToAdd()"><ion-icon name="create"></ion-icon></button>
 	</ion-fab>
-	<div class="item item-discription"  (click)="goBack()">
-
-		<div class="item-discription-icon"></div>
-		<div class="item-discription-text"></div>
+	<div class="item item-description" (click)="goBack()">
+		<div id="description">
+			<div class="item-description-icon"><ion-icon name="ios-information-circle-outline"></ion-icon></div>
+			<div class="item-description-text"> <p> {{toDoItem.description}} </p> </div>
+		</div>
+		<div id="priority">
+			<div class="item-description-icon"><ion-icon name="ios-speedometer-outline"></ion-icon></div>
+			<div class="item-description-text"> <p> {{toDoItem.priority}} </p> </div>
+		</div>
+		<div id="duedate">	
+			<div class="item-description-icon"><ion-icon name="ios-calendar-outline"></ion-icon></div>
+			<div class="item-description-text"> <p> {{toDoItem.duedate}} </p> </div>
+		</div>
+		<div id="estimatedTime">
+			<div class="item-description-icon"><ion-icon name="ios-timer-outline"></ion-icon></div>
+			<div class="item-description-text"> <p> {{toDoItem.estimatedTime}} </p> </div>
+		</div>
+		<div id="color">
+			<div class="item-description-icon"><ion-icon name="ios-color-fill-outline"></ion-icon></div>
+			<div class="item-description-text"> <div class="colorDiv" [ngStyle]="{'background-color': toDoItem.color}"></div></div>
+		</div>
 	</div>
 </ion-content>

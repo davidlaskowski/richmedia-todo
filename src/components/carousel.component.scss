@@ -24,14 +24,23 @@ carousel {
     color: #FFF;
     border-radius: 10px;
     top: 10px;
-    font-size: 100%;
     text-align: center;
     overflow: hidden;
+    transition: transform 0.5s;
+  }
+
+  .slide-wrapper {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    float: left;
+    z-index: 1;
+    left: 0;
+    transition: left 0.5s;
   }
 
   .slide-item {
     height: 100%;
-    display: inline-block;
   }
 
   .slide-item-index {
@@ -41,25 +50,27 @@ carousel {
     float: left;
     margin-left: 5%;
     color: black;
-    font-size: 30px;
     overflow: hidden;
+    display: flex;
+    text-align: center;
+  }
+  
+  .slide-item-index p {
+    margin: auto auto;
+    font-size: 17vw;
   }
 
-  .slide-item p {
-    margin: 40px auto;
-    min-width: 70px;
-    font-size: 100%;
+  .slide-item-name {
+    width: 65%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
   }
 
-  .slide-wrapper {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    float: left;
-    z-index: 1;
-    left:0;
-    transition: left 0.5s;
-  }
+  .slide-item-name p {
+    font-size: 6vw;
+   }
 
   .active {
     left: -30%;
@@ -87,5 +98,7 @@ carousel {
   .button-active {
     opacity: 1;
   }
+
+
 
 }

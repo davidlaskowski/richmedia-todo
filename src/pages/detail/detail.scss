@@ -15,18 +15,44 @@ page-detail {
 
 	}
 
-	.item-discription {
+	.item-description {
 		height: 100%;
 		width: 100%;
 		color: black;
 		background-color: white;
-		opacity: 0.9;
-		float: left;
+		text-align: center;
+		padding-top: 30px;
+		display: block;
+		font-size: 30px;
 	}
 
-	.item-discription-icon {
-		width: 20%;
-		height: 100%;
+	.item-description-icon {
+		width: auto;
+		height: auto;
+		display: block;
+	}
+
+	.item-description-text {
+		width: 100%;
+		height: auto;
+		display: inline-block;
+		margin: 0 10% 5% 10%;
+		text-align: left;
+	}
+
+	.item-description-text p{
+		margin: 0 10% 0 0;
+		font-size: 20px;
+	}
+
+	.colorDiv {
+		width: 30px;
+		height: 30px;
+		border-radius: 5px;
+	}
+
+	.disable {
+		display: none;
 	}
 }
 

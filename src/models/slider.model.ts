@@ -1,7 +1,12 @@
 export interface SlideItem {
-  idx: number;
-  name: string,
-  description: string;
-  color?: string;
-  currentPlacement: number
+	id: string;
+	idx: number;
+	name: string;
+	description: string;
+	priority?: number;
+	duedate?: any;
+	estimatedTime?: number;
+	points: number;
+	color: string;
+	currentPlacement: number;
 }
