@@ -7,6 +7,8 @@ import { FirebaseProvider } from '../../providers/firebase/firebase';
 import { Events } from 'ionic-angular';
 //import { DatePicker } from '@ionic-native/date-picker';
 
+import { HomePage } from '../home/home';
+
 /**
  * Generated class for the AddPage page.
  *
@@ -21,8 +23,8 @@ import { Events } from 'ionic-angular';
 
 export class AddPage {
   public color: string = '#ffa500';
-  public colors: Array<string> = ['#ff0000','#00ff00','#0000ff'];
-
+  public colors: Array<string> = ['#ff0000','#00ff00','#0000ff','#ff0000','#00ff00','#0000ff','#ff0000','#00ff00','#0000ff','#ff0000'];
+  
   todoItems: Observable<any[]>;
   newTodo = {} as ToDoItem;
 
@@ -58,4 +60,18 @@ export class AddPage {
      }
   }
 
+//
+  //  this.newTodo.color = document.querySelector('.color-item.selected').getAttribute('data-color');
+   // this.firebaseProvider.addItem(this.newTodo);
+ // }
+
+  selectColor(event){
+    let elements = Array.from(document.querySelectorAll('.color-item'));
+    elements.forEach(node =>{
+      node.classList.remove('selected');
+    })
+
+    event.target.classList.add("selected")
+    console.log(document.querySelector('.color-item.selected').getAttribute('data-color'));
+  }
 }

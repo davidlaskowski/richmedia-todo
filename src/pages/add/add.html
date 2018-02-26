@@ -40,6 +40,7 @@
     [style.background]="color"
     [cpPosition]="'bottom'"
     [(colorPicker)]="color"></ion-input>
+<<<<<<< HEAD
 </ion-item> -->
 
 <ion-item>
@@ -55,6 +56,21 @@
 	<ion-input type="date" [(ngModel)]="newTodo.duedate" ngControl="duedate" name="duedate"></ion-input>
 </ion-item>
 
-<button ion-button (click)="addTodo()">Submit</button>
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let item of colors" col-3>
+        <div class="color-item" style.background="{{item}}" attr.data-color="{{item}}" (click)="selectColor($event)"></div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col *ngFor="let item of priorities">
+        <div class="priority-item">{{item}}</div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <button ion-button (click)="addTodo()">Submit</button>
+
 </form>
 </ion-content>
