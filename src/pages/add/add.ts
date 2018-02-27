@@ -82,14 +82,8 @@ estimatedTime(){
 }
 
 //Funktion zum Auswählen einer Farbe
-selectColor(event, item){
-  let elements = Array.from(document.querySelectorAll('.color-item'));
-  elements.forEach(node =>{
-    node.classList.remove('selected');
-  })
-
-  event.target.classList.add("selected");
-  this.newTodo.color = item;
+selectColor(color){
+  this.newTodo.color = color;
 }
 
 //Funktion zum Prüfen der Validierung

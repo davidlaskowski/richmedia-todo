@@ -30,7 +30,7 @@ export class DetailPage {
   }
 
   convertToTime(){
-    if(this.toDoItem.estimatedTime!=undefined||this.toDoItem.estimatedTime!=0){
+    if(this.toDoItem.estimatedTime!=undefined&&this.toDoItem.estimatedTime!=0){
       var date = new Date(this.toDoItem.estimatedTime);
       var hh: any = date.getUTCHours();
       var mm: any = date.getUTCMinutes();
@@ -41,6 +41,7 @@ export class DetailPage {
     }
   }
 
+//Entfernen eines TODO's
   removeItem(){
     this.firebaseProvider.removeItem(this.toDoItem.id);
     this.events.publish('deleteItem');

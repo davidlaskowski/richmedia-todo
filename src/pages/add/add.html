@@ -33,8 +33,8 @@
 
     <ion-grid>
       <ion-row>
-        <ion-col *ngFor="let item of colors" col-3>
-          <div class="color-item" style.background="{{item}}" (click)="selectColor($event,item)">
+        <ion-col *ngFor="let color of colors" col-3>
+          <div [ngClass]="{'selected': color == newTodo.color}" class="color-item" style.background="{{color}}" (click)="selectColor(color)">
             <ion-icon class='icon' name='ios-checkmark'></ion-icon>
           </div> 
         </ion-col>
