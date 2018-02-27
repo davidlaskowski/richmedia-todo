@@ -3,6 +3,7 @@ page-add{
 	height: 40px;
 	width: 40px;
 	border-radius: 8px;
+	margin: 0 auto;
 
 	.icon{
 		display: none;
@@ -19,6 +20,12 @@ page-add{
 			display: inline-block;
 		}
 	}
+}
+
+.back-button {
+	font-size: 40px;
+	margin: 10px;
+	display: block;
 }
 
 }

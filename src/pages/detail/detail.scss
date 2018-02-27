@@ -1,15 +1,5 @@
 page-detail {
 
-	.item-name {
-		height: 20%;
-		opacity: 0.9;
-		border-top-left-radius: 20px;
-		border-top-right-radius: 20px;
-		font-size: 30px;
-		float: left;
-		color: white;
-	}
-
 	.item-name p {
 		margin: auto 0 auto 20%;
 
@@ -47,3 +37,13 @@ page-detail {
 
 }
 
+.item-name {
+		height: 20%;
+		opacity: 0.9;
+		border-top-left-radius: 20px;
+		border-top-right-radius: 20px;
+		font-size: 30px;
+		float: left;
+		color: white;
+		background-color: #488aff;
+	}

@@ -5,6 +5,6 @@ export interface ToDoItem{
 	priority: number;
 	duedate: any;
 	estimatedTime: number;
-	points: number;
+	points?: number;
 	color: string;
 }

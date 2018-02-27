@@ -1,9 +1,5 @@
-<ion-header>
-  <ion-navbar>
-    Todo hinzufügen
-
-  </ion-navbar>
-
+<ion-header class="item-name" [ngStyle]="{'background-color': newTodo.color}">
+ <ion-icon class="back-button" start (click)="goBack()" name="ios-close-circle-outline"></ion-icon>
 </ion-header>
 
 <ion-content>
@@ -11,11 +7,11 @@
 
     <ion-item>
       <ion-label>Name</ion-label>
-      <ion-input type="text" requiered [(ngModel)]="newTodo.name" ngControl="name" name="name"></ion-input>
+      <ion-input type="text" [(ngModel)]="newTodo.name" ngControl="name" name="name"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label>Beschreibung</ion-label>
+      <ion-label>Discription</ion-label>
       <ion-input [(ngModel)]="newTodo.description" ngControl="description" name="description"></ion-input>
     </ion-item>
     <ion-label>Priority <ion-badge item-end style="float: right;">{{newTodo.priority}}</ion-badge></ion-label>
@@ -24,22 +20,29 @@
       <ion-label range-left>1</ion-label>
       <ion-label range-right>10</ion-label>
     </ion-range>
-  <ion-item>
-    <ion-label>DueDate</ion-label>
-    <ion-input type="date" [(ngModel)]="newTodo.duedate" ngControl="duedate" name="duedate"></ion-input>
-  </ion-item>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col *ngFor="let item of colors" col-2>
-        <div class="color-item" style.background="{{item}}" (click)="selectColor($event,item)">
-          <ion-icon class='icon' name='ios-checkmark'></ion-icon>
-        </div> 
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-</ion-list>
-<div padding>
-  <button ion-button block (click)="addTodo()">Hinzufügen</button>  
-</div>
+    <ion-item>
+      <ion-label>DueDate</ion-label>
+      <ion-input type="date" [(ngModel)]="newTodo.duedate" ngControl="duedate" name="duedate"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label>Estimated Time</ion-label>
+      <ion-input type="time" (ionChange)="estimatedTime()" [(ngModel)]="time" ngControl="estimatedTime" name="estimatedTime"></ion-input>
+    </ion-item>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col *ngFor="let item of colors" col-3>
+          <div class="color-item" style.background="{{item}}" (click)="selectColor($event,item)">
+            <ion-icon class='icon' name='ios-checkmark'></ion-icon>
+          </div> 
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+
+  <div padding>
+    <button ion-button type="submit" (click)="addTodo()" block>Add</button>  
+  </div>
 </ion-content>

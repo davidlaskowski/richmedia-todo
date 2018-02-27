@@ -27,17 +27,21 @@ export class CarouselComponent {
     this.setSlides(values);    
   }
 
-  constructor(private eleRef: ElementRef, public navCtrl: NavController, public navParams: NavParams, public firebaseProvider: FirebaseProvider) {
-
+  constructor(private eleRef: ElementRef, public navCtrl: NavController, public navParams: NavParams, public firebaseProvider: FirebaseProvider, public events: Events) {
+    this.events.subscribe('deleteItem', _=> {
+      this.activeIndex--;
+      if(this.activeIndex > this.items.length - 1)
+        this.activeIndex = this.items.length - 1;
+      if(this.activeIndex < 0)
+        this.activeIndex = 0;
+    })
   }
 
   setSlides(values: Array<ToDoItem>){
-    var currentDate = new Date();
-    var currentTime = currentDate.getTime();
     this.theta = 360 / values.length;
     this.radius = 400;//Math.round((this.containerHeight / 2) / Math.tan(Math.PI / values.length));
     this.items = <Array<SlideItem>>values.map((item: ToDoItem, index: number) => {
-    
+
       let slideItem: SlideItem = {
         idx: index,
         id: item.id,
@@ -47,7 +51,7 @@ export class CarouselComponent {
         points: item.points,
         duedate: item.duedate,
         estimatedTime: item.estimatedTime,
-        color: 'hsla(' + this.theta*index/3 + ', 90%, 50%, 0.95)',
+        color: item.color,
         currentPlacement: this.theta * index
       };
       return slideItem;
@@ -55,8 +59,6 @@ export class CarouselComponent {
     })
     console.log(this.items);
     this.currentDeg = Math.round( this.currentDeg / this.theta ) * this.theta;
-    if(this.activeIndex > this.items.length - 1)
-      this.activeIndex = this.items.length - 1;
     this.applyStyle();
   }
 
@@ -100,6 +102,7 @@ showDetails(item: any){
 delete(item: any) {
   let index = item.idx;
   this.firebaseProvider.removeItem(item.id); 
+  this.events.publish('deleteItem');
 }
 
 //Funktion für die Swipe-Bewegung nach LINKS, Bewegen des TODO's nach Links und Anzeigen des Löschen-Buttons

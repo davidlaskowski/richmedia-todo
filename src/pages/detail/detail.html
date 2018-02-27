@@ -16,7 +16,7 @@
 	<div class="item-description" (click)="goBack()">
 		
 		<ion-item class="item">
-			<ion-label class="item-description-icon"><ion-icon name="ios-information-circle-outline"></ion-icon></ion-label><ion-input readonly [(ngModel)]="toDoItem.description"> </ion-input>
+			<ion-label class="item-description-icon"><ion-icon name="ios-information-circle-outline"></ion-icon></ion-label><ion-textarea readonly [(ngModel)]="toDoItem.description"> </ion-textarea>
 		</ion-item>
 		<ion-item class="item">
 			<ion-label class="item-description-icon"><ion-icon name="ios-speedometer-outline"></ion-icon></ion-label>
@@ -28,7 +28,7 @@
 		</ion-item>
 		<ion-item class="item">
 			<ion-label class="item-description-icon"><ion-icon name="ios-timer-outline"></ion-icon></ion-label>
-			<ion-input readonly type="time" [(ngModel)]="toDoItem.estimatedTime"></ion-input>
+			<ion-input readonly type="time" [(ngModel)]="time"></ion-input>
 		</ion-item>
 		<ion-item class="item">
 			<ion-label class="item-description-icon"><ion-icon name="ios-color-fill-outline"></ion-icon></ion-label>
@@ -36,4 +36,7 @@
 			<ion-input class="colorDiv" [ngStyle]="{'background-color': toDoItem.color}" readonly></ion-input>
 		</ion-item>
 	</div>
+	<ion-fab right bottom>
+		<button color="secondary" ion-fab (click)="removeItem()"><ion-icon  style="font-size: 30px;" name="checkmark"></ion-icon></button>
+	</ion-fab>
 </ion-content>

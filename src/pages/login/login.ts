@@ -17,6 +17,9 @@ import { HomePage } from '../home/home';
  	templateUrl: 'login.html',
  })
  export class LoginPage {
+
+ 	splash = false;
+
  	constructor(public afAuth: AngularFireAuth, public app: App, public navCtrl: NavController, public viewCtrl: ViewController) {
  	}
  	login() {
@@ -27,10 +30,11 @@ import { HomePage } from '../home/home';
  	}
 
  	goToAdd(){
- 		this.navCtrl.push(HomePage);
+ 		this.navCtrl.setRoot(HomePage);
  	}
+
  	ionViewDidLoad() {
- 		console.log('ionViewDidLoad LoginPage');
+ 		setTimeout(() => this.splash = false, 4200);
  	}
 
  }

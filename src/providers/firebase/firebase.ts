@@ -19,12 +19,16 @@ import { ToDoItem } from '../../models/todo.model';
       return this.angularFireDatabase.list('/todo/');
     }
 
+    search(start, end){
+      return this.angularFireDatabase.list('/todo', ref => ref.orderByChild("name").startAt(start).endAt(end));  
+    }
+
     addItem(toDoItem: ToDoItem) {
       this.angularFireDatabase.list('/todo/').push(toDoItem).then((snap) => {
-         toDoItem.id = snap.key;
-     this.angularFireDatabase.object('/todo/'+ toDoItem.id).update(toDoItem);
-     });
-  
+        toDoItem.id = snap.key;
+        this.angularFireDatabase.object('/todo/'+ toDoItem.id).update(toDoItem);
+      });
+
     }
 
     updateItem(toDoItem) {
