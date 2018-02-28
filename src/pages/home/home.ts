@@ -22,8 +22,9 @@ export class HomePage {
               public firebaseProvider: FirebaseProvider, 
               private events: Events, 
               public loadingCtrl: LoadingController) {
-    this.firebaseProvider.getAll().valueChanges().subscribe(res => {
+    this.firebaseProvider.getAll().subscribe(res => {
       console.log(res);
+      this.loading.dismiss();
       if(res.length != 0){
         res.forEach(this.calculatePoints);
         res.sort(function(a: ToDoItem, b: ToDoItem){return b.points - a.points});

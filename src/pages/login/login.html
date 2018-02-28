@@ -1,29 +1,24 @@
-<div id="custom-overlay" [style.display]="splash ? 'flex': 'none'">
-  <div class="flb">
-    <div class="Aligner-item Aligner-item--top"></div>
-    <img src="assets/imgs/logo2.png">
-    <div class="Aligner-item Aligner-item--bottom"></div>
-  </div>
-</div>
-
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Login</ion-title>
+    <ion-title>login</ion-title>
   </ion-navbar>
 
 </ion-header>
 <!-- <ion-nav #myNav [root]="rootPage"></ion-nav>
  -->
-<ion-content padding>
-<div *ngIf="afAuth.authState | async as user; else showLogin">
-      <h1>Hello {{ user.displayName }}!</h1>
-      <button ion-button (click)="goToAdd()">Continue</button>
-      <button ion-button (click)="logout()">Logout</button>
+<ion-content>
+  {{ user.uid }}
+  <div *ngIf="(user | async) || {} as user">
+    <button ion-button block *ngIf="!user.uid" (tap)="googleLogin()">
+      Login with Google
+    </button>
+    <div *ngIf="user.uid">
+      You are logged in as {{ user.uid }}
+      <button ion-button (tap)="continue()">
+        Continue
+      </button>
     </div>
-    <ng-template #showLogin>
-      <p>Please login.</p>
-      <button (click)="login()">Login with Google</button>
-    </ng-template>
-
+  </div>
+  <button ion-button block (tap)="continue()">Continue without Login</button>
 </ion-content>
