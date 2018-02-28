@@ -1,23 +1,35 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>List</ion-title>
-  </ion-navbar>
+
+	<ion-navbar>
+		<ion-title>List</ion-title>
+	</ion-navbar>
+
 </ion-header>
 
-<ion-content>
-  <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <ion-icon [name]="item.icon" item-start></ion-icon>
-      {{item.title}}
-      <div class="item-note" item-end>
-        {{item.note}}
-      </div>
-    </button>
-  </ion-list>
-  <div *ngIf="selectedItem" padding>
-    You navigated here from <b>{{selectedItem.title}}</b>
-  </div>
+
+<ion-content padding>
+	<ion-segment [(ngModel)]="mode">
+		<ion-segment-button value="todo">
+			to do
+		</ion-segment-button>
+		<ion-segment-button value="done">
+			done
+		</ion-segment-button>
+	</ion-segment>
+	<div [ngSwitch]="mode">
+		<ion-list *ngSwitchCase="'todo'">
+			<ion-list *ngFor="let todo of todos">
+				<ion-item (click)="goToDetail(todo)">
+					{{todo.name}}
+				</ion-item>
+			</ion-list>
+		</ion-list>
+		<ion-list *ngSwitchCase="'done'">
+			<ion-list *ngFor="let done of dones">
+				<ion-item>
+					{{done.name}}
+				</ion-item>
+			</ion-list>
+		</ion-list>
+	</div>
 </ion-content>

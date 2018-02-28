@@ -3,11 +3,19 @@
 </ion-header>
 
 <ion-content>
-	<img class="blur" src="../../assets/imgs/blur.png">
+	<img class="blur" src="/assets/imgs/blur.png">
 	<div style="height: 38%;"></div>
 	<carousel [slides]="slides"></carousel>
 	<ion-fab right bottom>
 		<button ion-fab (click)="goToAdd()"><ion-icon style="font-size: 30px;" name="add"></ion-icon></button>
+	</ion-fab>
+	<ion-fab right top>
+		<button ion-fab><ion-icon name="ios-arrow-down"></ion-icon></button>
+		<ion-fab-list side="bottom">
+			<button color="primary" ion-fab><ion-icon name="md-list"></ion-icon></button>
+			<button color="primary" ion-fab><ion-icon name="md-settings"></ion-icon></button>
+			<button color="primary" ion-fab><ion-icon name="md-information"></ion-icon></button>
+		</ion-fab-list>
 	</ion-fab>
 
 </ion-content>

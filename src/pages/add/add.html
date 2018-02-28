@@ -6,16 +6,16 @@
   <ion-list inset>
 
     <ion-item>
-      <ion-label>Name</ion-label>
+      <ion-label floating>Name</ion-label>
       <ion-input type="text" [(ngModel)]="newTodo.name" ngControl="name" name="name"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label>Discription</ion-label>
+      <ion-label floating>Description</ion-label>
       <ion-input [(ngModel)]="newTodo.description" ngControl="description" name="description"></ion-input>
     </ion-item>
-    <ion-label>Priority <ion-badge item-end style="float: right;">{{newTodo.priority}}</ion-badge></ion-label>
 
+    <ion-label>Priority <ion-badge end style="float: right;">{{newTodo.priority}}</ion-badge></ion-label>
     <ion-range min="1" max="10" [(ngModel)]="newTodo.priority" ngControl="priority" name="priority">
       <ion-label range-left>1</ion-label>
       <ion-label range-right>10</ion-label>

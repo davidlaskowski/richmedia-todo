@@ -18,10 +18,10 @@ export class HomePage {
   private loading: any;
 
   constructor(public navCtrl: NavController, 
-              public navParams: NavParams, 
-              public firebaseProvider: FirebaseProvider, 
-              private events: Events, 
-              public loadingCtrl: LoadingController) {
+    public navParams: NavParams, 
+    public firebaseProvider: FirebaseProvider, 
+    private events: Events, 
+    public loadingCtrl: LoadingController) {
     this.firebaseProvider.getAll().valueChanges().subscribe(res => {
       console.log(res);
       if(res.length != 0){
@@ -45,21 +45,21 @@ export class HomePage {
 
 //Algorithmus zur Ermittelung der Wertigkeiten eines TODO's
 calculatePoints(item: ToDoItem){
-  var daysleft;
-  var timeNeeded;
+  var daysleft = undefined;
+  var timeNeeded = undefined;
   var currentDate = new Date();
   var currentTime = currentDate.getTime();
+
   //Tage bis Due Date
-  if(item.duedate!=undefined){
+  if(item.duedate!=""){
     var dueDate = new Date(item.duedate);
     var dueTime = dueDate.getTime();
-    daysleft = Math.round((dueTime - currentTime)/86400000);
+    daysleft = (dueTime - currentTime)/86400000;
   }
 
   if(item.estimatedTime!=undefined){
     timeNeeded = item.estimatedTime / 3600000;
   }
-
 
   if(item.estimatedTime==undefined||item.estimatedTime==0){
     //Estimated Time nicht verfügbar
@@ -70,7 +70,7 @@ calculatePoints(item: ToDoItem){
       //Due Date verfügbar
       item.points = Math.pow(item.priority, 3)/(Math.sqrt(daysleft));
       if(daysleft<item.priority)
-        item.points += daysleft * (item.priority - daysleft);
+        item.points += Math.pow((item.priority - daysleft),2);
     }
   }else{
     //Estimated Time verfügbar
@@ -81,7 +81,7 @@ calculatePoints(item: ToDoItem){
       //Due Date verfügbar
       item.points = Math.pow(item.priority,2) * timeNeeded / daysleft;
       if(daysleft<item.priority)
-        item.points += daysleft * (item.priority - daysleft);
+        item.points += Math.pow((item.priority - daysleft),2);
     }
   }
   item.points = Math.round(item.points);

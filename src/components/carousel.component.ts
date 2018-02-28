@@ -19,7 +19,6 @@ export class CarouselComponent {
   private radius: number;
   private theta: number;
   private activeIndex: number = 0;
-  private ToDoItem: ToDoItem;
 
   @Input() set slides(values: Array<ToDoItem>) {
     if (!values.length) return;
