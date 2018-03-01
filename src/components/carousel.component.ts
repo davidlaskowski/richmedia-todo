@@ -28,9 +28,9 @@ export class CarouselComponent {
 
   constructor(private eleRef: ElementRef, public navCtrl: NavController, public navParams: NavParams, public firebaseProvider: FirebaseProvider, public events: Events) {
     this.events.subscribe('deleteItem', _=> {
+
       if(this.items.length<=1)
         this.items.pop();
-
       this.activeIndex--;
       if(this.activeIndex > this.items.length - 1)
         this.activeIndex = this.items.length - 1;

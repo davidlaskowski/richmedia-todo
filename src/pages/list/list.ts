@@ -15,8 +15,8 @@ export class ListPage {
 	private todos = [];
 	private dones = [];
 	mode: string = "todo";
-	af;
-	af2;
+	private af;
+	private af2;
 
 	constructor(public navCtrl: NavController, 
 				public navParams: NavParams, 

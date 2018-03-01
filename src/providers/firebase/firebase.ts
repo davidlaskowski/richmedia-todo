@@ -12,7 +12,6 @@ interface User{
   email: string;
   displayName?: string;
 }
-
   @Injectable()
   export class FirebaseProvider {
 

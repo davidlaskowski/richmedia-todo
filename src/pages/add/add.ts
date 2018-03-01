@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { FirebaseProvider } from '../../providers/firebase/firebase';
 import { Events } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
+import { CalendarProvider } from '../../providers/calendar/calendar';
 
 import { HomePage } from '../home/home';
 
@@ -34,7 +35,8 @@ export class AddPage {
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,  
-    public firebaseProvider: FirebaseProvider, 
+    public firebaseProvider: FirebaseProvider,
+    public calendarProvider: CalendarProvider, 
     private events: Events, 
     private alertCtrl: AlertController,
     private toastCtrl: ToastController) {
@@ -53,11 +55,16 @@ export class AddPage {
 
        this.edit = true;
      }
+     this.calendarProvider.listCalendars();
+     this.calendarProvider.getCalendarOptions();
+     this.calendarProvider.addEvent("Name","Home","Description", new Date(2018,1,15,20,0,0,0), new Date(2018,1,15,20,0,0,0));
      this.todoItems = this.firebaseProvider.getAll('/todo/');
+
    }
 
 //Hinzufügen eines TODO's
 addTodo(){
+  console.log("addTodo");
   if(this.isEntryValid()){
     if(this.edit == true){  
       this.firebaseProvider.updateItem(this.newTodo);
@@ -67,6 +74,10 @@ addTodo(){
       this.events.publish('centerItem');
       this.firebaseProvider.addItem(this.newTodo);
     }
+    console.log(this.newTodo);
+    this.calendarProvider.initialize();
+    console.log(this.newTodo.duedate);
+    this.calendarProvider.addEvent(this.newTodo.name,"", this.newTodo.description, this.newTodo.duedate, this.newTodo.duedate);
     this.presentToast();
     this.goBack();
   }

@@ -23,7 +23,7 @@ import { ToDoItem } from '../../models/todo.model';
 export class HomePage {
   private slides = [];
   private loading: any;
-  af
+  private af;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 

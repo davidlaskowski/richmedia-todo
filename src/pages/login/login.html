@@ -1,31 +1,21 @@
-<div id="custom-overlay" [style.display]="splash ? 'flex': 'none'">
-  <div class="flb">
-    <div class="Aligner-item Aligner-item--top"></div>
-    <img src="assets/imgs/logo2.png">
-    <div class="Aligner-item Aligner-item--bottom"></div>
-  </div>
-</div>
-
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>Login</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-<ion-content>
-  {{ user.uid }}
-  <div *ngIf="(user | async) || {} as user">
-    <button ion-button block *ngIf="!user.uid" (tap)="googleLogin()">
-      Login with Google
-    </button>
-    <div *ngIf="user.uid">
-      You are logged in as {{ user.uid }}
-      <button ion-button (tap)="continue()">
-        Continue
-      </button>
+  <div id="custom-overlay" [style.display]="splash ? 'flex': 'none'">
+    <div class="flb">
+      <div class="Aligner-item Aligner-item--top"></div>
+      <img src="assets/imgs/logo2.png">
+      <div class="Aligner-item Aligner-item--bottom"></div>
     </div>
   </div>
-  <button ion-button block (tap)="continue()">Continue without Login</button>
+</ion-header> -->
+
+<ion-content padding>
+  <div style="height: 100%;" *ngIf="(user | async) || {} as user">
+    <button ion-button icon-start full large color="light" *ngIf="!user.uid" (click)="googleLogin()">
+      <ion-icon name="logo-google"></ion-icon>
+      Login with Google
+    </button>
+    <button ion-button full large color="light" *ngIf="user.uid" (click)="continue()">
+      Continue
+    </button>
+  </div>
 </ion-content>

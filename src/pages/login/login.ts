@@ -70,57 +70,8 @@ import { Observable } from 'rxjs/Observable';
 
  	}
 
- 	signOut(){
- 		this.afAuth.auth.signOut();
- 		if(this.platform.is('cordova')){
- 			this.googlePlus.logout();
- 		}
-
- 	}
-
  	continue(){
  		this.navCtrl.setRoot(HomePage);
- 	}
-
- 	login() {
- 		alert("Login pressed");
- 		this.googlePlus.login({
- 			'webClientId': '922338825719-3o75d8f3so7gis34vmru45a8tsq42tbp.apps.googleusercontent.com',
- 			'offline': true
- 		}).then(res=>{
- 			firebase.auth().signInWithCredential(firebase.auth.GoogleAuthProvider.credential(res.idToken))
- 			.then(suc=>{
- 				alert("Login Success");
- 				this.navCtrl.push("HomePage");
- 			}).catch(ns=>{
- 				alert("Login not successfull");
- 			})
- 		})
- 		//this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
- 	}
- 	logout() {
- 		this.afAuth.auth.signOut();
- 	}
-
- 	testlogin(){
-
- 		this.googlePlus.login({
- 			'webClientId': '922338825719-3o75d8f3so7gis34vmru45a8tsq42tbp.apps.googleusercontent.com'
- 		}).then((res) => {
- 			this.navCtrl.push(HomePage);
- 			console.log(res);
- 		}, (err) => {
- 			console.log(err);
- 		});
-
- 	}
-
- 	testlogout(){
-
- 		this.googlePlus.logout().then(() => {
- 			console.log("logged out");
- 		});
-
  	}
 
  }

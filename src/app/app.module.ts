@@ -6,7 +6,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { IonicSwipeAllModule } from 'ionic-swipe-all';
 import { AngularFireModule } from 'angularfire2';
 import { GooglePlus } from '@ionic-native/google-plus';
-
+import { Calendar } from '@ionic-native/calendar';
+import { HttpClientModule } from '@angular/common/http'; 
+import { HttpModule } from '@angular/http';
 
 const firebaseConfig = {
     apiKey: "AIzaSyCTUi0ANMofysl-7YKVcFRvNTVcLSCHNtk",
@@ -32,6 +34,7 @@ import { CarouselComponent } from "../components/carousel.component";
 import { IonicStorageModule } from '@ionic/storage';
 import { TodoProvider } from '../providers/todo/todo';
 import { FirebaseProvider } from '../providers/firebase/firebase';
+import { CalendarProvider } from '../providers/calendar/calendar';
 
 
 
@@ -55,7 +58,9 @@ import { FirebaseProvider } from '../providers/firebase/firebase';
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    IonicSwipeAllModule
+    IonicSwipeAllModule,
+    HttpModule,
+    HttpClientModule
     
   ],
   bootstrap: [IonicApp],
@@ -74,7 +79,9 @@ import { FirebaseProvider } from '../providers/firebase/firebase';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     TodoProvider,
     FirebaseProvider,
-    GooglePlus
+    CalendarProvider,
+    GooglePlus,
+    Calendar
   ]
 })
 export class AppModule {}
