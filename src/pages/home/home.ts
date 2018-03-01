@@ -100,7 +100,7 @@ calculatePoints(item: ToDoItem){
   item.points = Math.round(item.points);
 }
 //Umleitung auf Add-Page
-goTo(){
+goToAdd(){
   this.navCtrl.push(AddPage);
 }
 
