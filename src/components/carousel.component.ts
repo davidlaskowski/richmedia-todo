@@ -146,7 +146,7 @@ moveRight(event) {
 
   let but = ele.nextSibling.nextSibling;
   ele.classList.remove('active')
-  setTimeout(() => {but.classList.remove('button-active')}, 500);
+  setTimeout(() => {but.classList.remove('button-active')}, 300);
 }
 
 

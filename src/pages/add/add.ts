@@ -64,6 +64,7 @@ addTodo(){
       this.events.publish('updateItem', this.newTodo);
 
     }else{
+      this.events.publish('centerItem');
       this.firebaseProvider.addItem(this.newTodo);
     }
     this.presentToast();

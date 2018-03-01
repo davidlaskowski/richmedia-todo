@@ -1,8 +1,14 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { GooglePlus } from '@ionic-native/google-plus';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { Platform } from 'ionic-angular';
 
 import { AddPage } from '../add/add';
-import { ListPage } from '../list/list'
+import { ListPage } from '../list/list';
+import { LoginPage } from '../login/login';
+
+import { AboutPage } from '../about/about';
 import { CarouselComponent } from "../../components/carousel.component";
 import { Events } from 'ionic-angular';
 import { FirebaseProvider } from '../../providers/firebase/firebase';
@@ -17,13 +23,17 @@ import { ToDoItem } from '../../models/todo.model';
 export class HomePage {
   private slides = [];
   private loading: any;
+  af
 
   constructor(public navCtrl: NavController, 
-              public navParams: NavParams, 
-              public firebaseProvider: FirebaseProvider, 
-              private events: Events, 
-              public loadingCtrl: LoadingController) {
-    this.firebaseProvider.getAll('/todo/').subscribe(res => {
+    public navParams: NavParams, 
+    public firebaseProvider: FirebaseProvider, 
+    private events: Events, 
+    public loadingCtrl: LoadingController,
+    public afAuth: AngularFireAuth,
+     public googlePlus: GooglePlus, 
+     public platform: Platform) {
+    this.af = this.firebaseProvider.getAll('/todo/').subscribe(res => {
       if(res.length != 0){
         res.forEach(this.calculatePoints);
         res.sort(function(a: ToDoItem, b: ToDoItem){return b.points - a.points});
@@ -34,7 +44,7 @@ export class HomePage {
         this.loading.dismiss();
       }else{
         this.slides = [];
-         this.loading.dismiss();
+        this.loading.dismiss();
       }
     });
   }
@@ -89,15 +99,32 @@ calculatePoints(item: ToDoItem){
   }
   item.points = Math.round(item.points);
 }
-//Umleitung auf die Hinzufügen-Seite 
-goToAdd(){
+//Umleitung auf Add-Page
+goTo(){
   this.navCtrl.push(AddPage);
 }
 
+//Umleitung auf List-Page
 goToList(){
   this.navCtrl.push(ListPage);
 }
 
+//Umleitung auf About-Page
+goToAbout(){
+  this.navCtrl.push(AboutPage);
+}
+
+//Umleitung auf Option-Page
+logout(){
+  this.af.unsubscribe();
+  this.afAuth.auth.signOut();
+     if(this.platform.is('cordova')){
+       this.googlePlus.logout();
+     }
+  this.navCtrl.setRoot(LoginPage);
+}
+
+//Rücksprung auf 1 Element
 center(){
   this.events.publish("centerItem");
 }

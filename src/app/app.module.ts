@@ -27,6 +27,7 @@ import { AddPage } from '../pages/add/add';
 import { DetailPage } from '../pages/detail/detail';
 import { LoginPage } from '../pages/login/login';
 import { ListPage } from '../pages/list/list';
+import { AboutPage } from '../pages/about/about';
 import { CarouselComponent } from "../components/carousel.component";
 import { IonicStorageModule } from '@ionic/storage';
 import { TodoProvider } from '../providers/todo/todo';
@@ -43,6 +44,7 @@ import { FirebaseProvider } from '../providers/firebase/firebase';
     DetailPage,
     LoginPage,
     ListPage,
+    AboutPage,
     CarouselComponent
   ],
   imports: [
@@ -63,6 +65,7 @@ import { FirebaseProvider } from '../providers/firebase/firebase';
     AddPage,
     DetailPage,
     ListPage,
+    AboutPage,
     LoginPage
   ],
   providers: [

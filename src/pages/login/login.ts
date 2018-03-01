@@ -30,7 +30,7 @@ import { Observable } from 'rxjs/Observable';
  	ionViewDidLoad() {
  		setTimeout(() => this.splash = false, 4000);
  	}
- 	
+
  	async nativeGoogleLogin(): Promise<void>{
  		try{
  			const gplusUser = await this.googlePlus.login({
@@ -103,7 +103,7 @@ import { Observable } from 'rxjs/Observable';
  	}
 
  	testlogin(){
- 		
+
  		this.googlePlus.login({
  			'webClientId': '922338825719-3o75d8f3so7gis34vmru45a8tsq42tbp.apps.googleusercontent.com'
  		}).then((res) => {
@@ -112,15 +112,15 @@ import { Observable } from 'rxjs/Observable';
  		}, (err) => {
  			console.log(err);
  		});
- 		
+
  	}
- 	
+
  	testlogout(){
- 		
+
  		this.googlePlus.logout().then(() => {
  			console.log("logged out");
  		});
- 		
+
  	}
 
  }
