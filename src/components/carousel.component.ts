@@ -1,5 +1,4 @@
-import { Component, Input, Output, EventEmitter, ElementRef, QueryList, ContentChildren } from '@angular/core';
-import { IonicSwipeAllModule } from 'ionic-swipe-all';
+import { Component, Input, ElementRef } from '@angular/core';
 import { Events, NavController, NavParams } from 'ionic-angular';
 
 import { DetailPage } from "../pages/detail/detail";
@@ -15,7 +14,6 @@ import { FirebaseProvider } from '../providers/firebase/firebase';
 export class CarouselComponent {
   private currentDeg: number = 0;
   private items: Array<SlideItem> = [];
-  private containerHeight: number = 116;
   private radius: number;
   private theta: number;
   private activeIndex: number = 0;

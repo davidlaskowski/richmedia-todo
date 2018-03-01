@@ -2,7 +2,8 @@ page-login{
   .content{
     background-color: #3ebffb;
     button{
-      margin-top:20%;
+      top: 50%;
+      transform: translateY(-50%);
     }
   }
 }

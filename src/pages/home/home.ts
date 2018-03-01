@@ -9,7 +9,6 @@ import { ListPage } from '../list/list';
 import { LoginPage } from '../login/login';
 
 import { AboutPage } from '../about/about';
-import { CarouselComponent } from "../../components/carousel.component";
 import { Events } from 'ionic-angular';
 import { FirebaseProvider } from '../../providers/firebase/firebase';
 import { ToDoItem } from '../../models/todo.model';
@@ -31,8 +30,8 @@ export class HomePage {
     private events: Events, 
     public loadingCtrl: LoadingController,
     public afAuth: AngularFireAuth,
-     public googlePlus: GooglePlus, 
-     public platform: Platform) {
+    public googlePlus: GooglePlus, 
+    public platform: Platform) {
     this.af = this.firebaseProvider.getAll('/todo/').subscribe(res => {
       if(res.length != 0){
         res.forEach(this.calculatePoints);
@@ -99,7 +98,7 @@ calculatePoints(item: ToDoItem){
     }
   }
   item.points = Math.round(item.points);
-  }
+}
   //Umleitung auf Add-Page
   goToAdd(){
     this.navCtrl.push(AddPage);
@@ -119,9 +118,9 @@ calculatePoints(item: ToDoItem){
   logout(){
     this.af.unsubscribe();
     this.afAuth.auth.signOut();
-       if(this.platform.is('cordova')){
-         this.googlePlus.logout();
-       }
+    if(this.platform.is('cordova')){
+      this.googlePlus.logout();
+    }
     this.navCtrl.setRoot(LoginPage);
   }
 

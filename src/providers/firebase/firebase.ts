@@ -1,27 +1,21 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList} from "angularfire2/database"; 
+import { AngularFireDatabase } from "angularfire2/database";
 import { ToDoItem } from '../../models/todo.model';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
 import { Observable } from 'rxjs/Observable';
 
 
-interface User{
-  uid: string;
-  email: string;
-  displayName?: string;
-}
-  @Injectable()
-  export class FirebaseProvider {
+@Injectable()
+export class FirebaseProvider {
 
-    userId: string;
-    idToken: string;
-    list: Observable<any>;
+  userId: string;
+  idToken: string;
+  list: Observable<any>;
 
-    constructor(public afAuth: AngularFireAuth, public angularFireDatabase: AngularFireDatabase) {
-      
-    }
+  constructor(public afAuth: AngularFireAuth, public angularFireDatabase: AngularFireDatabase) {
+    
+  }
     //Anfrage an Firebase abhängig von gegebenen "path"
     getAll(path: string){
       this.userId = firebase.auth().currentUser.uid;

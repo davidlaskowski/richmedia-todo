@@ -1,14 +1,12 @@
 import { Component } from '@angular/core';
 import { ToDoItem } from '../../models/todo.model';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
-import { AngularFireDatabase, AngularFireList} from 'angularfire2/database'; 
 import { Observable } from 'rxjs/Observable';
 import { FirebaseProvider } from '../../providers/firebase/firebase';
 import { Events } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { CalendarProvider } from '../../providers/calendar/calendar';
-
-import { HomePage } from '../home/home';
+import { Platform } from 'ionic-angular';
 
 @Component({
   selector: 'page-add',
@@ -39,7 +37,8 @@ export class AddPage {
     public calendarProvider: CalendarProvider, 
     private events: Events, 
     private alertCtrl: AlertController,
-    private toastCtrl: ToastController) {
+    private toastCtrl: ToastController,
+    private platform: Platform) {
 
      //Optional, BEARBEITUNG eines TODO's über Detail-Seite
      if(this.navParams.get('id') != undefined){
@@ -55,16 +54,15 @@ export class AddPage {
 
        this.edit = true;
      }
-     this.calendarProvider.listCalendars();
-     this.calendarProvider.getCalendarOptions();
-     this.calendarProvider.addEvent("Name","Home","Description", new Date(2018,1,15,20,0,0,0), new Date(2018,1,15,20,0,0,0));
+     if(this.platform.is('cordova')){
+       this.calendarProvider.initialize();
+     }
      this.todoItems = this.firebaseProvider.getAll('/todo/');
 
    }
 
   //Hinzufügen eines TODO's
   addTodo(){
-    console.log("addTodo");
     if(this.isEntryValid()){
       if(this.edit == true){  
         this.firebaseProvider.updateItem(this.newTodo);
@@ -74,10 +72,9 @@ export class AddPage {
         this.events.publish('centerItem');
         this.firebaseProvider.addItem(this.newTodo);
       }
-      console.log(this.newTodo);
-      this.calendarProvider.initialize();
-      console.log(this.newTodo.duedate);
-      this.calendarProvider.addEvent(this.newTodo.name,"", this.newTodo.description, this.newTodo.duedate, this.newTodo.duedate);
+      if(this.platform.is('cordova')){
+        this.calendarProvider.addEvent(this.newTodo.name,"", this.newTodo.description, this.newTodo.duedate, this.newTodo.duedate);
+      }
       this.presentToast();
       this.goBack();
     }

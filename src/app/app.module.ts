@@ -32,7 +32,6 @@ import { ListPage } from '../pages/list/list';
 import { AboutPage } from '../pages/about/about';
 import { CarouselComponent } from "../components/carousel.component";
 import { IonicStorageModule } from '@ionic/storage';
-import { TodoProvider } from '../providers/todo/todo';
 import { FirebaseProvider } from '../providers/firebase/firebase';
 import { CalendarProvider } from '../providers/calendar/calendar';
 
@@ -74,7 +73,6 @@ import { CalendarProvider } from '../providers/calendar/calendar';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    TodoProvider,
     FirebaseProvider,
     CalendarProvider,
     GooglePlus,
