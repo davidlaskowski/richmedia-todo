@@ -1,14 +1,19 @@
-<ion-header>
+<!-- <ion-header>
 
   <ion-navbar>
     <ion-title>login</ion-title>
   </ion-navbar>
 
-</ion-header>
+</ion-header> -->
 <!-- <ion-nav #myNav [root]="rootPage"></ion-nav>
  -->
-<ion-content>
-  {{ user.uid }}
+<ion-content padding>
+
+  <button ion-button icon-start full large  color="light">
+  <ion-icon name="logo-google"></ion-icon>
+  Login with Google
+</button>
+  <!-- {{ user.uid }}
   <div *ngIf="(user | async) || {} as user">
     <button ion-button block *ngIf="!user.uid" (tap)="googleLogin()">
       Login with Google
@@ -20,5 +25,5 @@
       </button>
     </div>
   </div>
-  <button ion-button block (tap)="continue()">Continue without Login</button>
+  <button ion-button block (tap)="continue()">Continue without Login</button> -->
 </ion-content>
