@@ -5,13 +5,14 @@
   Ionic pages and navigation.
 -->
 <ion-header class="item-name" [ngStyle]="{'background-color': toDoItem.color}">
-	<div style="height: 65%;"><ion-icon class="back-button" start (click)="goBack()" name="ios-close-circle-outline"></ion-icon></div>
+	<ion-icon class="back-button" start (click)="goBack()" name="ios-close-circle-outline"></ion-icon>
+	<div style="height: 25%;"></div>
 	<p> {{toDoItem.name}} </p>
 </ion-header>
 
 <ion-content>
 	<ion-fab left top edge>
-		<button mini ion-fab (click)="goToAdd()"><ion-icon name="create"></ion-icon></button>
+		<button mini ion-fab [disabled]=disabled (click)="goToAdd()"><ion-icon name="create"></ion-icon></button>
 	</ion-fab>
 	<div class="item-description">
 		
@@ -37,6 +38,6 @@
 		</ion-item>
 	</div>
 	<ion-fab right bottom>
-		<button color="danger" ion-fab (click)="removeItem()"><ion-icon  style="font-size: 30px;" name="trash"></ion-icon></button>
+		<button color="danger" ion-fab [disabled]=disabled (click)="removeItem()"><ion-icon  style="font-size: 30px;" name="trash"></ion-icon></button>
 	</ion-fab>
 </ion-content>

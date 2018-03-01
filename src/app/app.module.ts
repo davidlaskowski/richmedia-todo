@@ -5,6 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { IonicSwipeAllModule } from 'ionic-swipe-all';
 import { AngularFireModule } from 'angularfire2';
+import { GooglePlus } from '@ionic-native/google-plus';
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyCTUi0ANMofysl-7YKVcFRvNTVcLSCHNtk",
@@ -68,7 +70,8 @@ import { FirebaseProvider } from '../providers/firebase/firebase';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     TodoProvider,
-    FirebaseProvider
+    FirebaseProvider,
+    GooglePlus
   ]
 })
 export class AppModule {}

@@ -53,7 +53,7 @@ export class AddPage {
 
        this.edit = true;
      }
-     this.todoItems = this.firebaseProvider.getAll().valueChanges();
+     this.todoItems = this.firebaseProvider.getAll('/todo/');
    }
 
 //Hinzufügen eines TODO's

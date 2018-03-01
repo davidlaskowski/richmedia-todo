@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
 
 import { AddPage } from '../add/add';
+import { ListPage } from '../list/list'
 import { CarouselComponent } from "../../components/carousel.component";
 import { Events } from 'ionic-angular';
 import { FirebaseProvider } from '../../providers/firebase/firebase';
@@ -18,12 +19,11 @@ export class HomePage {
   private loading: any;
 
   constructor(public navCtrl: NavController, 
-    public navParams: NavParams, 
-    public firebaseProvider: FirebaseProvider, 
-    private events: Events, 
-    public loadingCtrl: LoadingController) {
-    this.firebaseProvider.getAll().valueChanges().subscribe(res => {
-      console.log(res);
+              public navParams: NavParams, 
+              public firebaseProvider: FirebaseProvider, 
+              private events: Events, 
+              public loadingCtrl: LoadingController) {
+    this.firebaseProvider.getAll('/todo/').subscribe(res => {
       if(res.length != 0){
         res.forEach(this.calculatePoints);
         res.sort(function(a: ToDoItem, b: ToDoItem){return b.points - a.points});
@@ -32,6 +32,9 @@ export class HomePage {
         
         this.slides = res;
         this.loading.dismiss();
+      }else{
+        this.slides = [];
+         this.loading.dismiss();
       }
     });
   }
@@ -76,7 +79,7 @@ calculatePoints(item: ToDoItem){
     //Estimated Time verfügbar
     if(daysleft<=0||daysleft==undefined){
       //Due Date nicht verfügbar
-      item.points = item.priority * timeNeeded / 2;
+      item.points = item.priority * timeNeeded;
     }else{
       //Due Date verfügbar
       item.points = Math.pow(item.priority,2) * timeNeeded / daysleft;
@@ -89,6 +92,14 @@ calculatePoints(item: ToDoItem){
 //Umleitung auf die Hinzufügen-Seite 
 goToAdd(){
   this.navCtrl.push(AddPage);
+}
+
+goToList(){
+  this.navCtrl.push(ListPage);
+}
+
+center(){
+  this.events.publish("centerItem");
 }
 
 }

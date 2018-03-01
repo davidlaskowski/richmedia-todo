@@ -1,13 +1,10 @@
-<ion-header>
-
-	<ion-navbar>
-		<ion-title>List</ion-title>
-	</ion-navbar>
-
+<ion-header class="item-name">
+	<ion-icon class="back-button" start (click)="goBack()" name="ios-close-circle-outline"></ion-icon>
 </ion-header>
 
 
 <ion-content padding>
+	
 	<ion-segment [(ngModel)]="mode">
 		<ion-segment-button value="todo">
 			to do
@@ -16,17 +13,18 @@
 			done
 		</ion-segment-button>
 	</ion-segment>
+
 	<div [ngSwitch]="mode">
 		<ion-list *ngSwitchCase="'todo'">
 			<ion-list *ngFor="let todo of todos">
-				<ion-item (click)="goToDetail(todo)">
+				<ion-item (click)="goToDetail(todo, false)">
 					{{todo.name}}
 				</ion-item>
 			</ion-list>
 		</ion-list>
 		<ion-list *ngSwitchCase="'done'">
 			<ion-list *ngFor="let done of dones">
-				<ion-item>
+				<ion-item (click)="goToDetail(done, true)">
 					{{done.name}}
 				</ion-item>
 			</ion-list>

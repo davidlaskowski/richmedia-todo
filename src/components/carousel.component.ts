@@ -15,7 +15,7 @@ import { FirebaseProvider } from '../providers/firebase/firebase';
 export class CarouselComponent {
   private currentDeg: number = 0;
   private items: Array<SlideItem> = [];
-  private containerHeight: number = 140;
+  private containerHeight: number = 116;
   private radius: number;
   private theta: number;
   private activeIndex: number = 0;
@@ -28,17 +28,25 @@ export class CarouselComponent {
 
   constructor(private eleRef: ElementRef, public navCtrl: NavController, public navParams: NavParams, public firebaseProvider: FirebaseProvider, public events: Events) {
     this.events.subscribe('deleteItem', _=> {
+      if(this.items.length<=1)
+        this.items.pop();
+
       this.activeIndex--;
       if(this.activeIndex > this.items.length - 1)
         this.activeIndex = this.items.length - 1;
       if(this.activeIndex < 0)
         this.activeIndex = 0;
     })
+    this.events.subscribe('centerItem', _=> {
+      this.activeIndex = 0;
+      this.currentDeg = 0;
+      this.applyStyle();
+    })
   }
 
   setSlides(values: Array<ToDoItem>){
     this.theta = 360 / values.length;
-    this.radius = 400;//Math.round((this.containerHeight / 2) / Math.tan(Math.PI / values.length));
+    this.radius = 400;
     this.items = <Array<SlideItem>>values.map((item: ToDoItem, index: number) => {
 
       let slideItem: SlideItem = {
@@ -56,7 +64,6 @@ export class CarouselComponent {
       return slideItem;
       
     })
-    console.log(this.items);
     this.currentDeg = Math.round( this.currentDeg / this.theta ) * this.theta;
     this.applyStyle();
   }
@@ -93,15 +100,27 @@ private applyStyle() {
 //Umleitung auf die DETAIL-Seite eines TODO's
 showDetails(item: any){
   if(this.activeIndex == item.idx){
-    this.navCtrl.push(DetailPage, {'item': item}, {animation: 'md-transition',duration: 1000});
+    this.navCtrl.push(DetailPage, {'item': item, 'disabled': false}, {animation: 'md-transition',duration: 1000});
   }
 }
 
 //Funktion zum LÖSCHEN eines TODO's
 delete(item: any) {
-  let index = item.idx;
-  this.firebaseProvider.removeItem(item.id); 
+  let toDoItem: ToDoItem = {
+    id: item.id,
+    name: item.name,
+    description: item.description,
+    priority: item.priority,
+    duedate: item.duedate,
+    estimatedTime: item.estimatedTime,
+    color: item.color,
+    points: item.points
+  }
+  
   this.events.publish('deleteItem');
+  this.firebaseProvider.doneItem(toDoItem);
+  this.firebaseProvider.removeItem(item.id); 
+  
 }
 
 //Funktion für die Swipe-Bewegung nach LINKS, Bewegen des TODO's nach Links und Anzeigen des Löschen-Buttons

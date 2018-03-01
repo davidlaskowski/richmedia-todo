@@ -1,41 +1,50 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList} from "angularfire2/database"; 
 import { ToDoItem } from '../../models/todo.model';
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase';
+import { Observable } from 'rxjs/Observable';
 
-/*
-  Generated class for the FirebaseProvider provider.
 
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-  */
+interface User{
+  uid: string;
+  email: string;
+  displayName?: string;
+}
+
   @Injectable()
   export class FirebaseProvider {
 
-    constructor(public angularFireDatabase: AngularFireDatabase) {
+    userId: string;
+    idToken: string;
+    list: Observable<any>;
+
+    constructor(public afAuth: AngularFireAuth, public angularFireDatabase: AngularFireDatabase) {
     }
 
-    getAll() {
-      return this.angularFireDatabase.list('/todo/');
-    }
-
-    search(start, end){
-      return this.angularFireDatabase.list('/todo', ref => ref.orderByChild("name").startAt(start).endAt(end));  
+    getAll(path: string){
+      this.userId = firebase.auth().currentUser.uid;
+      return this.angularFireDatabase.list('/users/' + this.userId + path).valueChanges();
     }
 
     addItem(toDoItem: ToDoItem) {
-      this.angularFireDatabase.list('/todo/').push(toDoItem).then((snap) => {
+      this.angularFireDatabase.list('/users/' + this.userId + '/todo/').push(toDoItem).then((snap) => {
         toDoItem.id = snap.key;
-        this.angularFireDatabase.object('/todo/'+ toDoItem.id).update(toDoItem);
+        this.angularFireDatabase.object('/users/' + this.userId + '/todo/' + toDoItem.id).update(toDoItem);
       });
 
     }
 
+    doneItem(toDoItem: ToDoItem){
+      this.angularFireDatabase.list('/users/'+ this.userId + '/done/').push(toDoItem);
+    }
+
     updateItem(toDoItem) {
-      this.angularFireDatabase.object('/todo/'+ toDoItem.id).update(toDoItem);
+      this.angularFireDatabase.object('/users/' + this.userId + '/todo/'+ toDoItem.id).update(toDoItem);
     }
 
     removeItem(id) {
-      this.angularFireDatabase.list('/todo/').remove(id);
+      this.angularFireDatabase.list('/users/' + this.userId + '/todo/').remove(id);
     }
   }
