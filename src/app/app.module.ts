@@ -28,6 +28,7 @@ import { HomePage } from '../pages/home/home';
 import { AddPage } from '../pages/add/add';
 import { DetailPage } from '../pages/detail/detail';
 import { LoginPage } from '../pages/login/login';
+import { ListPage } from '../pages/list/list';
 import { CarouselComponent } from "../components/carousel.component";
 import { IonicStorageModule } from '@ionic/storage';
 import { TodoProvider } from '../providers/todo/todo';
@@ -44,6 +45,7 @@ import { CalendarProvider } from '../providers/calendar/calendar';
     AddPage,
     DetailPage,
     LoginPage,
+    ListPage,
     CarouselComponent
   ],
   imports: [
@@ -65,6 +67,7 @@ import { CalendarProvider } from '../providers/calendar/calendar';
     HomePage,
     AddPage,
     DetailPage,
+    ListPage,
     LoginPage
   ],
   providers: [

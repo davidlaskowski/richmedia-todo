@@ -3,31 +3,34 @@
 </ion-header>
 
 <ion-content>
+  <ion-fab left top edge>
+    <button mini ion-fab color="secondary"(click)="addTodo()"><ion-icon name="checkmark"></ion-icon></button>
+  </ion-fab>
   <ion-list inset>
 
     <ion-item>
-      <ion-label>Name</ion-label>
+      <ion-label floating>Name</ion-label>
       <ion-input type="text" [(ngModel)]="newTodo.name" ngControl="name" name="name"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label>Discription</ion-label>
+      <ion-label floating>Description</ion-label>
       <ion-input [(ngModel)]="newTodo.description" ngControl="description" name="description"></ion-input>
     </ion-item>
-    <ion-label>Priority <ion-badge item-end style="float: right;">{{newTodo.priority}}</ion-badge></ion-label>
 
+    <ion-label>Priority <ion-badge style="float: right;">{{newTodo.priority}}</ion-badge></ion-label>
     <ion-range min="1" max="10" [(ngModel)]="newTodo.priority" ngControl="priority" name="priority">
       <ion-label range-left>1</ion-label>
       <ion-label range-right>10</ion-label>
     </ion-range>
 
     <ion-item>
-      <ion-label>DueDate</ion-label>
+      <ion-label stacked>DueDate</ion-label>
       <ion-input type="date" [(ngModel)]="newTodo.duedate" ngControl="duedate" name="duedate"></ion-input>
     </ion-item>
     
     <ion-item>
-      <ion-label>Estimated Time</ion-label>
+      <ion-label floating>Estimated Time</ion-label>
       <ion-input type="time" (ionChange)="estimatedTime()" [(ngModel)]="time" ngControl="estimatedTime" name="estimatedTime"></ion-input>
     </ion-item>
 
@@ -42,7 +45,4 @@
     </ion-grid>
   </ion-list>
 
-  <div padding>
-    <button ion-button type="submit" (click)="addTodo()" block>Add</button>  
-  </div>
 </ion-content>

@@ -1,9 +1,11 @@
-<!-- <ion-header>
-
-  <ion-navbar>
-    <ion-title>login</ion-title>
-  </ion-navbar>
-
+<ion-header>
+<div id="custom-overlay" [style.display]="splash ? 'flex': 'none'">
+  <div class="flb">
+    <div class="Aligner-item Aligner-item--top"></div>
+    <img src="assets/imgs/logo2.png">
+    <div class="Aligner-item Aligner-item--bottom"></div>
+  </div>
+</div>
 </ion-header> -->
 <!-- <ion-nav #myNav [root]="rootPage"></ion-nav>
  -->
@@ -14,6 +16,12 @@
   Login with Google
 </button>
   <!-- {{ user.uid }}
+=======
+</ion-header>
+
+<ion-content>
+  {{ user.uid }}
+>>>>>>> cf51dc1a59e682d41db356e1a19d3f13e6e220ac
   <div *ngIf="(user | async) || {} as user">
     <button ion-button block *ngIf="!user.uid" (tap)="googleLogin()">
       Login with Google

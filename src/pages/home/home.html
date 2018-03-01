@@ -7,7 +7,16 @@
 	<div style="height: 38%;"></div>
 	<carousel [slides]="slides"></carousel>
 	<ion-fab right bottom>
+		<button style="margin: 12px 0" ion-fab (click)="center()"><ion-icon style="font-site: 30px;" name="ios-locate-outline"></ion-icon></button>
 		<button ion-fab (click)="goToAdd()"><ion-icon style="font-size: 30px;" name="add"></ion-icon></button>
+	</ion-fab>
+	<ion-fab right top>
+		<button ion-fab><ion-icon name="menu"></ion-icon></button>
+		<ion-fab-list side="bottom">
+			<button color="primary" ion-fab (click)="goToList()"><ion-icon name="md-list"></ion-icon></button>
+			<button color="primary" ion-fab><ion-icon name="md-settings"></ion-icon></button>
+			<button color="primary" ion-fab><ion-icon name="md-information"></ion-icon></button>
+		</ion-fab-list>
 	</ion-fab>
 
 </ion-content>

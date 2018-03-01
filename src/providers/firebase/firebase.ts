@@ -22,25 +22,9 @@ interface User{
     constructor(public afAuth: AngularFireAuth, public angularFireDatabase: AngularFireDatabase) {
     }
 
-    getAll(){
+    getAll(path: string){
       this.userId = firebase.auth().currentUser.uid;
-      console.log("test");
-      
-      console.log(this.userId)
-      this.list = this.angularFireDatabase.list('/users/' + this.userId + '/todo/').valueChanges();
-      this.list.subscribe((response) => {
-        if (response.length == 0) {
-          this.angularFireDatabase.database.ref('users/' + this.userId).set({
-            todo:"todo",
-            done:"done"
-          })
-        }
-      });
-      return this.list;
-    }
-
-    search(start, end){
-      return this.angularFireDatabase.list('/users/' + this.userId + '/todo/', ref => ref.orderByChild("name").startAt(start).endAt(end));  
+      return this.angularFireDatabase.list('/users/' + this.userId + path).valueChanges();
     }
 
     addItem(toDoItem: ToDoItem) {
@@ -49,6 +33,10 @@ interface User{
         this.angularFireDatabase.object('/users/' + this.userId + '/todo/' + toDoItem.id).update(toDoItem);
       });
 
+    }
+
+    doneItem(toDoItem: ToDoItem){
+      this.angularFireDatabase.list('/users/'+ this.userId + '/done/').push(toDoItem);
     }
 
     updateItem(toDoItem) {

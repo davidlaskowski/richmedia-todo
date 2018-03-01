@@ -58,7 +58,8 @@ export class AddPage {
      this.calendarProvider.listCalendars();
      this.calendarProvider.getCalendarOptions();
      this.calendarProvider.addEvent("Name","Home","Description", new Date(2018,1,15,20,0,0,0), new Date(2018,1,15,20,0,0,0));
-     this.todoItems = this.firebaseProvider.getAll();
+     this.todoItems = this.firebaseProvider.getAll('/todo/');
+
    }
 
 //Hinzufügen eines TODO's

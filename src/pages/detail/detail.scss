@@ -35,15 +35,22 @@ page-detail {
 		flex: none;
 	}
 
+
+	.back-button {
+		font-size: 40px;
+		margin: 10px;
+		display: block;
+	}
+
 }
 
 .item-name {
-		height: 20%;
-		opacity: 0.9;
-		border-top-left-radius: 20px;
-		border-top-right-radius: 20px;
-		font-size: 30px;
-		float: left;
-		color: white;
-		background-color: #488aff;
-	}
+	height: 20%;
+	opacity: 0.9;
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+	font-size: 30px;
+	float: left;
+	color: white;
+	background-color: #488aff;
+}

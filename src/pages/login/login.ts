@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { App, NavController, ViewController } from 'ionic-angular';
-import { IonicPage } from 'ionic-angular';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
@@ -22,11 +21,16 @@ import { Observable } from 'rxjs/Observable';
  export class LoginPage {
 
  	user: Observable<firebase.User>
+ 	splash = true;
 
  	constructor(public afAuth: AngularFireAuth, public app: App, public navCtrl: NavController, public viewCtrl: ViewController, public googlePlus: GooglePlus, public platform: Platform) {
  		this.user = this.afAuth.authState;
  	}
 
+ 	ionViewDidLoad() {
+ 		setTimeout(() => this.splash = false, 4000);
+ 	}
+ 	
  	async nativeGoogleLogin(): Promise<void>{
  		try{
  			const gplusUser = await this.googlePlus.login({
@@ -55,12 +59,12 @@ import { Observable } from 'rxjs/Observable';
  	googleLogin(){
  		if(this.platform.is('cordova')){
  			this.nativeGoogleLogin().then( (data) => {
- 	 			this.navCtrl.setRoot(HomePage);
+ 				this.navCtrl.setRoot(HomePage);
  			});
  			
  		} else {
  			this.webGoogleLogin().then( (data) => {
- 	 			this.navCtrl.setRoot(HomePage);
+ 				this.navCtrl.setRoot(HomePage);
  			});
  		}
 
@@ -85,12 +89,12 @@ import { Observable } from 'rxjs/Observable';
  			'offline': true
  		}).then(res=>{
  			firebase.auth().signInWithCredential(firebase.auth.GoogleAuthProvider.credential(res.idToken))
- 				.then(suc=>{
-					alert("Login Success");
- 					this.navCtrl.push("HomePage");
- 				}).catch(ns=>{
- 					alert("Login not successfull");
- 				})
+ 			.then(suc=>{
+ 				alert("Login Success");
+ 				this.navCtrl.push("HomePage");
+ 			}).catch(ns=>{
+ 				alert("Login not successfull");
+ 			})
  		})
  		//this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
  	}
@@ -98,32 +102,25 @@ import { Observable } from 'rxjs/Observable';
  		this.afAuth.auth.signOut();
  	}
 
- 	goToAdd(){
-		this.navCtrl.push("HomePage");
- 	}
- 	ionViewDidLoad() {
- 		console.log('ionViewDidLoad LoginPage');
- 	}
-
  	testlogin(){
- 
-        this.googlePlus.login({
-          'webClientId': '922338825719-3o75d8f3so7gis34vmru45a8tsq42tbp.apps.googleusercontent.com'
-        }).then((res) => {
-        	this.navCtrl.push(HomePage);
-            console.log(res);
-        }, (err) => {
-            console.log(err);
-        });
- 
-    }
- 
-    testlogout(){
- 
-        this.googlePlus.logout().then(() => {
-            console.log("logged out");
-        });
- 
-    }
+ 		
+ 		this.googlePlus.login({
+ 			'webClientId': '922338825719-3o75d8f3so7gis34vmru45a8tsq42tbp.apps.googleusercontent.com'
+ 		}).then((res) => {
+ 			this.navCtrl.push(HomePage);
+ 			console.log(res);
+ 		}, (err) => {
+ 			console.log(err);
+ 		});
+ 		
+ 	}
+ 	
+ 	testlogout(){
+ 		
+ 		this.googlePlus.logout().then(() => {
+ 			console.log("logged out");
+ 		});
+ 		
+ 	}
 
  }
