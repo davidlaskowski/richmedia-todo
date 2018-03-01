@@ -1,31 +1,30 @@
 page-add{
-.color-item{
-	height: 40px;
-	width: 40px;
-	border-radius: 8px;
-	margin: 0 auto;
+	.color-item{
+		height: 40px;
+		width: 40px;
+		border-radius: 8px;
+		margin: 0 auto;
 
-	.icon{
-		display: none;
-		font-size: 6rem;
-	}
-
-	&.selected{
-		display:flex;
-		justify-content:center;
-		align-items:center;
-		font-size: 1em;
-		color: #ffffff;
 		.icon{
-			display: inline-block;
+			display: none;
+			font-size: 6rem;
+		}
+
+		&.selected{
+			display:flex;
+			justify-content:center;
+			align-items:center;
+			font-size: 1em;
+			color: #ffffff;
+			.icon{
+				display: inline-block;
+			}
 		}
 	}
-}
 
-.back-button {
-	font-size: 40px;
-	margin: 10px;
-	display: block;
-}
-
+	.back-button {
+		font-size: 40px;
+		margin: 10px;
+		display: block;
+	}
 }

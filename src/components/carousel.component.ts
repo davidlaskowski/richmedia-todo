@@ -44,29 +44,30 @@ export class CarouselComponent {
     })
   }
 
-  setSlides(values: Array<ToDoItem>){
-    this.theta = 360 / values.length;
-    this.radius = 400;
-    this.items = <Array<SlideItem>>values.map((item: ToDoItem, index: number) => {
+//Initialisierung des Karussells
+setSlides(values: Array<ToDoItem>){
+  this.theta = 360 / values.length;
+  this.radius = 400;
+  this.items = <Array<SlideItem>>values.map((item: ToDoItem, index: number) => {
 
-      let slideItem: SlideItem = {
-        idx: index,
-        id: item.id,
-        name: item.name,
-        description: item.description,
-        priority: item.priority,
-        points: item.points,
-        duedate: item.duedate,
-        estimatedTime: item.estimatedTime,
-        color: item.color,
-        currentPlacement: this.theta * index
-      };
-      return slideItem;
-      
-    })
-    this.currentDeg = Math.round( this.currentDeg / this.theta ) * this.theta;
-    this.applyStyle();
-  }
+    let slideItem: SlideItem = {
+      idx: index,
+      id: item.id,
+      name: item.name,
+      description: item.description,
+      priority: item.priority,
+      points: item.points,
+      duedate: item.duedate,
+      estimatedTime: item.estimatedTime,
+      color: item.color,
+      currentPlacement: this.theta * index
+    };
+    return slideItem;
+    
+  })
+  this.currentDeg = Math.round( this.currentDeg / this.theta ) * this.theta;
+  this.applyStyle();
+}
 
 //Funktion für die Swipe-Bewegung nach UNTEN
 swipeDown(event) {

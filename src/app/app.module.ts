@@ -19,9 +19,9 @@ const firebaseConfig = {
     messagingSenderId: "922338825719"
 
 };
+
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -36,11 +36,8 @@ import { TodoProvider } from '../providers/todo/todo';
 import { FirebaseProvider } from '../providers/firebase/firebase';
 import { CalendarProvider } from '../providers/calendar/calendar';
 
-
-
-
 @NgModule({
-  declarations: [
+    declarations: [
     MyApp,
     HomePage,
     AddPage,
@@ -49,8 +46,8 @@ import { CalendarProvider } from '../providers/calendar/calendar';
     ListPage,
     AboutPage,
     CarouselComponent
-  ],
-  imports: [
+    ],
+    imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot({
@@ -62,9 +59,9 @@ import { CalendarProvider } from '../providers/calendar/calendar';
     HttpModule,
     HttpClientModule
     
-  ],
-  bootstrap: [IonicApp],
-  entryComponents: [
+    ],
+    bootstrap: [IonicApp],
+    entryComponents: [
     MyApp,
     HomePage,
     AddPage,
@@ -72,8 +69,8 @@ import { CalendarProvider } from '../providers/calendar/calendar';
     ListPage,
     AboutPage,
     LoginPage
-  ],
-  providers: [
+    ],
+    providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
@@ -82,6 +79,6 @@ import { CalendarProvider } from '../providers/calendar/calendar';
     CalendarProvider,
     GooglePlus,
     Calendar
-  ]
+    ]
 })
 export class AppModule {}

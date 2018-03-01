@@ -32,6 +32,7 @@ export class DetailPage {
     this.navCtrl.pop({animation: 'md-transition',duration: 500});
   }
 
+  //Konvertiert Zeit in ms zu Stunden und Minuten für Anzeige
   convertToTime(){
     if(this.toDoItem.estimatedTime!=undefined&&this.toDoItem.estimatedTime!=0){
       var date = new Date(this.toDoItem.estimatedTime);
@@ -44,15 +45,15 @@ export class DetailPage {
     }
   }
 
-//Entfernen eines TODO's
+  //Entfernen eines TODO's
   removeItem(){
     this.firebaseProvider.removeItem(this.toDoItem.id);
     this.events.publish('deleteItem');
     this.navCtrl.pop();
   }
 
-//Umleitung auf die Hinzufügen-Seite zur BEARBEITUNG
-goToAdd() {
-  this.navCtrl.push(AddPage, {'id': this.toDoItem.id, 'name': this.toDoItem.name, 'description': this.toDoItem.description, 'priority': this.toDoItem.priority, 'duedate': this.toDoItem.duedate, 'estimatedTime': this.toDoItem.estimatedTime, 'color': this.toDoItem.color});
-}
+  //Umleitung auf die Hinzufügen-Seite zur BEARBEITUNG
+  goToAdd() {
+    this.navCtrl.push(AddPage, {'id': this.toDoItem.id, 'name': this.toDoItem.name, 'description': this.toDoItem.description, 'priority': this.toDoItem.priority, 'duedate': this.toDoItem.duedate, 'estimatedTime': this.toDoItem.estimatedTime, 'color': this.toDoItem.color});
+  }
 }

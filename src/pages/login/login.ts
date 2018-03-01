@@ -7,13 +7,6 @@ import { HomePage } from '../home/home';
 import { Platform } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
  @Component({
  	selector: 'page-login',
  	templateUrl: 'login.html',

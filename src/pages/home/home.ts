@@ -70,6 +70,7 @@ calculatePoints(item: ToDoItem){
     daysleft = (dueTime - currentTime)/86400000;
   }
 
+  //Umrechnung Millisekunden zu Stunden
   if(item.estimatedTime!=undefined){
     timeNeeded = item.estimatedTime / 3600000;
   }
@@ -98,35 +99,35 @@ calculatePoints(item: ToDoItem){
     }
   }
   item.points = Math.round(item.points);
-}
-//Umleitung auf Add-Page
-goToAdd(){
-  this.navCtrl.push(AddPage);
-}
+  }
+  //Umleitung auf Add-Page
+  goToAdd(){
+    this.navCtrl.push(AddPage);
+  }
 
-//Umleitung auf List-Page
-goToList(){
-  this.navCtrl.push(ListPage);
-}
+  //Umleitung auf List-Page
+  goToList(){
+    this.navCtrl.push(ListPage);
+  }
 
-//Umleitung auf About-Page
-goToAbout(){
-  this.navCtrl.push(AboutPage);
-}
+  //Umleitung auf About-Page
+  goToAbout(){
+    this.navCtrl.push(AboutPage);
+  }
 
-//Umleitung auf Option-Page
-logout(){
-  this.af.unsubscribe();
-  this.afAuth.auth.signOut();
-     if(this.platform.is('cordova')){
-       this.googlePlus.logout();
-     }
-  this.navCtrl.setRoot(LoginPage);
-}
+  //Umleitung auf Option-Page
+  logout(){
+    this.af.unsubscribe();
+    this.afAuth.auth.signOut();
+       if(this.platform.is('cordova')){
+         this.googlePlus.logout();
+       }
+    this.navCtrl.setRoot(LoginPage);
+  }
 
-//Rücksprung auf 1 Element
-center(){
-  this.events.publish("centerItem");
-}
+  //Rücksprung auf erstes Element
+  center(){
+    this.events.publish("centerItem");
+  }
 
 }

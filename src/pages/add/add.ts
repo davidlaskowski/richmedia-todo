@@ -26,7 +26,7 @@ export class AddPage {
     description:"",
     priority:1,
     estimatedTime:0,
-    duedate:"",
+    duedate:"dd:mm:yyyy",
     color:""
   };
 
@@ -62,88 +62,86 @@ export class AddPage {
 
    }
 
-//Hinzufügen eines TODO's
-addTodo(){
-  console.log("addTodo");
-  if(this.isEntryValid()){
-    if(this.edit == true){  
-      this.firebaseProvider.updateItem(this.newTodo);
-      this.events.publish('updateItem', this.newTodo);
+  //Hinzufügen eines TODO's
+  addTodo(){
+    console.log("addTodo");
+    if(this.isEntryValid()){
+      if(this.edit == true){  
+        this.firebaseProvider.updateItem(this.newTodo);
+        this.events.publish('updateItem', this.newTodo);
 
-    }else{
-      this.events.publish('centerItem');
-      this.firebaseProvider.addItem(this.newTodo);
+      }else{
+        this.events.publish('centerItem');
+        this.firebaseProvider.addItem(this.newTodo);
+      }
+      console.log(this.newTodo);
+      this.calendarProvider.initialize();
+      console.log(this.newTodo.duedate);
+      this.calendarProvider.addEvent(this.newTodo.name,"", this.newTodo.description, this.newTodo.duedate, this.newTodo.duedate);
+      this.presentToast();
+      this.goBack();
     }
-    console.log(this.newTodo);
-    this.calendarProvider.initialize();
-    console.log(this.newTodo.duedate);
-    this.calendarProvider.addEvent(this.newTodo.name,"", this.newTodo.description, this.newTodo.duedate, this.newTodo.duedate);
-    this.presentToast();
-    this.goBack();
   }
-}
 
-goBack(){
-   this.navCtrl.pop();
-}
-
-//Funktion zum Konvertieren eines Time-Formats in einen Timestamp
-estimatedTime(){
-  var date = new Date("1970-01-01T"+this.time+":00Z");
-  this.newTodo.estimatedTime = date.getTime();
-}
-
-//Funktion zum Auswählen einer Farbe
-selectColor(color){
-  this.newTodo.color = color;
-}
-
-//Funktion zum Prüfen der Validierung
-isEntryValid(){
-  let errorMessage: string = "Please ";
-  if(this.newTodo.name == undefined || this.newTodo.name == ""){
-    errorMessage += "enter a name!";
-    this.errorAlert(errorMessage);
-    return false;
+  goBack(){
+    this.navCtrl.pop();
   }
-  if(this.newTodo.color == undefined){
-    errorMessage += "pick a color!";
-    this.errorAlert(errorMessage);
-    return false;
+
+  //Funktion zum Konvertieren eines Time-Formats in einen Timestamp
+  estimatedTime(){
+    var date = new Date("1970-01-01T"+this.time+":00Z");
+    this.newTodo.estimatedTime = date.getTime();
   }
-  return true;
-}
 
-//Alert bei Invaliden Input
-errorAlert(error){
-  let alert = this.alertCtrl.create({
-    title: 'Invalid input',
-    message: error,
-    buttons: ['Dismiss']
-  })
-  alert.present();
-}
-
-//Funktion zum konvertieren eines Timestamps in ein Time-Format
-convertToTime(){
-  if(this.newTodo.estimatedTime!=undefined){
-    var date = new Date(this.newTodo.estimatedTime);
-    var hh: any = date.getUTCHours();
-    var mm: any = date.getUTCMinutes();
-    if (hh < 10) {hh = "0"+hh;}
-    if (mm < 10) {mm = "0"+mm;}
-    this.time = hh + ":" + mm; 
+  //Funktion zum Auswählen einer Farbe
+  selectColor(color){
+    this.newTodo.color = color;
   }
-}
 
-presentToast() {
-  let toast = this.toastCtrl.create({
-    message: 'TODO was added successfully',
-    duration: 3000,
-    position: 'bottom'
-  });
+  //Funktion zum Prüfen der Validierung
+  isEntryValid(){
+    let errorMessage: string = "Please ";
+    if(this.newTodo.name == undefined || this.newTodo.name == ""){
+      errorMessage += "enter a name!";
+      this.errorAlert(errorMessage);
+      return false;
+    }
+    if(this.newTodo.color == undefined){
+      errorMessage += "pick a color!";
+      this.errorAlert(errorMessage);
+      return false;
+    }
+    return true;
+  }
 
+  //Alert bei Invaliden Input
+  errorAlert(error){
+    let alert = this.alertCtrl.create({
+      title: 'Invalid input',
+      message: error,
+      buttons: ['Dismiss']
+    })
+    alert.present();
+  }
 
+  //Funktion zum konvertieren eines Timestamps in ein Time-Format
+  convertToTime(){
+    if(this.newTodo.estimatedTime!=undefined){
+      var date = new Date(this.newTodo.estimatedTime);
+      var hh: any = date.getUTCHours();
+      var mm: any = date.getUTCMinutes();
+      if (hh < 10) {hh = "0"+hh;}
+      if (mm < 10) {mm = "0"+mm;}
+      this.time = hh + ":" + mm; 
+    }
+  }
+
+  presentToast() {
+    let toast = this.toastCtrl.create({
+      message: 'TODO was added successfully',
+      duration: 3000,
+      position: 'bottom'
+    });
     toast.present();
-}
+  }
 }
