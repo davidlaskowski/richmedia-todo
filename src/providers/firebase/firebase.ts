@@ -20,6 +20,7 @@ interface User{
     list: Observable<any>;
 
     constructor(public afAuth: AngularFireAuth, public angularFireDatabase: AngularFireDatabase) {
+      
     }
 
     getAll(path: string){

@@ -36,10 +36,11 @@ import { Platform } from 'ionic-angular';
 
     addEvent(title,location,notes,startDate,endDate){
       var options = this.calendar.getCalendarOptions();
-this.calendar.listCalendars().then(res => {
-options.calendarId = res[0].id;
-this.calendar.createEventWithOptions(title, location, notes, this.toDate(startDate), this.toDate(endDate), options);
-});
+      this.calendar.listCalendars().then(res => {
+        options.calendarId = res[0].id;
+        //this.calendar.createEventWithOptions(title, location, notes, this.toDate(startDate), this.toDate(endDate), options);
+        this.calendar.createEventInteractively();
+      });
       // let options = this.calendar.getCalendarOptions();
       // this.calendar.listCalendars().then(res => {
       //   console.log(res[0].id);
@@ -50,24 +51,24 @@ this.calendar.createEventWithOptions(title, location, notes, this.toDate(startDa
       // }, function(res) {
       //   alert('error : ' + res);
       // }); 
-}
+    }
 
-listCalendars(){
-  console.log("Calendars:")
-  console.log(this.calendars);
-}
+    listCalendars(){
+      console.log("Calendars:")
+      console.log(this.calendars);
+    }
 
-getCalendarOptions(){
-  console.log(this.calendar.getCalendarOptions());
-}
+    getCalendarOptions(){
+      console.log(this.calendar.getCalendarOptions());
+    }
 
-toDate(dateStr) {
-  console.log(dateStr.toString());
-  var parts = dateStr.toString().split("-");
-  console.log("DATE:");
-  console.log(parts[0]);
-  console.log(parts[1]-1);
-  console.log(parts[2]);
-  return new Date(parts[0], parts[1] - 1, parts[2]);
-}
-}
+    toDate(dateStr) {
+      console.log(dateStr.toString());
+      var parts = dateStr.toString().split("-");
+      console.log("DATE:");
+      console.log(parts[0]);
+      console.log(parts[1]-1);
+      console.log(parts[2]);
+      return new Date(parts[0], parts[1] - 1, parts[2]);
+    }
+  }
